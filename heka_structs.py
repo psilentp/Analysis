@@ -1,6 +1,6 @@
 from collections import namedtuple
 import struct
-import data_structs
+#import data_structs
 import copy
 Tree = namedtuple('Tree','contents children')
 
