@@ -1,12 +1,13 @@
-import neo
 from __future__ import absolute_import
+import neo
 from neo.io.baseio import BaseIO
 from neo.core import Block, Segment, AnalogSignal, EventArray
-from neo.tools import create_many_to_one_relationship
+from neo.io.tools import create_many_to_one_relationship
 import numpy as np
-import quantites as pq
+import quantities as pq
+from read_heka import *
 
-class ExampleIO(BaseIO):
+class HekaIO(BaseIO):
     is_readable = True
     is_writable = False
     supported_objects = [Segment,AnalogSignal,EventArray]
@@ -31,43 +32,40 @@ class ExampleIO(BaseIO):
 
     mode = 'file'
 
-    def __init_(self,filename = None):
+    def __init__(self,filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'):
+        print 'here'
         BaseIO.__init__(self)
         self.filename = filename
-        f = open('./test_data/CEN184/THL_2012-03-21_18-40-42_000.dat')
+        f = open(filename)
         #create a bundle header object with the file
         head = BundleHeader(f)
         #load the file
         head.load(f)
+
+        #print head
         #get the .pgf and .pul items in the file
         for bi in head.oBundleItems:
             if str(bi.oExtension)[0:4] == '.pgf':
                 self.pgf = PGFFile(f,bi)
             if str(bi.oExtension)[0:4] == '.pul':
+                #print 'here'
                 self.pul = PULFile(f,bi)
+        f.close()
 
     def read_segment(self,
                     lazy = False,
-                    cascade = True,
-                    path):
+                    cascade = True):
         seg = Segment( name = 'test')
         if cascade:
-            seg.analogsignals = getleafs(self.pul.tree)
-
+            seg.analogsignals = getleafs(self.pul.tree,open(self.filename))
+        create_many_to_one_relationship(seg)
+        return seg
 
     def read_analogsignal(self,
                         lazy = False,
                         cascade = True):
-        pass
 
-def pu(str):
-    from quantities import ms,kHz,pA,mV
-    if str == 'pA':
-        return pA
-    if str == 'mV':
-        return mV
-    if str == 'ms':
-        return ms
+        pass
 
 def getleafs(tree_obj,f):
     if isinstance(tree_obj['contents'], TraceRecord):
@@ -92,6 +90,12 @@ def gettrace(trec,f):
     byte_string = f.read(int(trec.trDataPoints)*pointsize)
     import numpy as np
     ydata = np.fromstring(byte_string,dtype = dtype)
-    return AnalogSignal(ydata*float(trec.trDataScaler)*pu(trec.trXunit[0]),
-                        sampling_period=float(trec.trXInterval)*pu(trec.XUnit[0]),
-                        units = trec.trXUnit[0])
+    print ydata
+    print trec.trDataScaler
+    print pu(trec.trXUnit[0])
+    print trec.trXUnit[0]
+    tunit = pq.Quantity(1,trec.trXUnit)
+    yunit = pq.Quantity(1,trec.trYUnit)
+    return AnalogSignal(ydata*float(trec.trDataScaler)*yunit,
+                        sampling_period=float(trec.trXInterval)*tunit,
+                        units = trec.trYUnit[0])
