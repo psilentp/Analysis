@@ -25,7 +25,7 @@ class HEKA_type(object):
         
     def __repr__(self):
         return self.data.__repr__()
-    
+
     def __str__(self):
         return str(self.data or 'None')
         
