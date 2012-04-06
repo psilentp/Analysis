@@ -58,7 +58,6 @@ def _create_plot_component():
                 plot.value_range.tight_bounds = False
                 plot.value_range.refresh()
                 plot.tools.append(PanTool(plot))
-
                 # The ZoomTool tool is stateful and allows drawing a zoom
                 # box to select a zoom region.
                 zoom = ZoomTool(plot, tool_mode="box", always_on=False)

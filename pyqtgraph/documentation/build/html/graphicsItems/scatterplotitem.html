@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ScatterPlotItem &mdash; pyqtgraph v1.8 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyqtgraph v1.8 documentation" href="../index.html" />
+    <link rel="up" title="Pyqtgraph’s Graphics Items" href="index.html" />
+    <link rel="next" title="PlotItem" href="plotitem.html" />
+    <link rel="prev" title="PlotCurveItem" href="plotcurveitem.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plotitem.html" title="PlotItem"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plotcurveitem.html" title="PlotCurveItem"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">pyqtgraph v1.8 documentation</a> &raquo;</li>
+          <li><a href="../apireference.html" >API Reference</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Pyqtgraph&#8217;s Graphics Items</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="scatterplotitem">
+<h1>ScatterPlotItem<a class="headerlink" href="#scatterplotitem" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyqtgraph.ScatterPlotItem">
+<em class="property">class </em><tt class="descclassname">pyqtgraph.</tt><tt class="descname">ScatterPlotItem</tt><big>(</big><em>*args</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#pyqtgraph.ScatterPlotItem" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pyqtgraph.ScatterPlotItem.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>*args</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#pyqtgraph.ScatterPlotItem.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accepts the same arguments as setData()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyqtgraph.ScatterPlotItem.addPoints">
+<tt class="descname">addPoints</tt><big>(</big><em>*args</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#pyqtgraph.ScatterPlotItem.addPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new points to the scatter plot. 
+Arguments are the same as setData()
+Note: this is expensive; plenty of room for optimization here.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyqtgraph.ScatterPlotItem.setData">
+<tt class="descname">setData</tt><big>(</big><em>*args</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#pyqtgraph.ScatterPlotItem.setData" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Ordered Arguments:</dt>
+<dd><p class="first">If there is only one unnamed argument, it will be interpreted like the &#8216;spots&#8217; argument.</p>
+<p class="last">If there are two unnamed arguments, they will be interpreted as sequences of x and y values.</p>
+</dd>
+<dt>Keyword Arguments:</dt>
+<dd><dl class="first docutils">
+<dt><em>spots</em>: Optional list of dicts. Each dict specifies parameters for a single spot:</dt>
+<dd>{&#8216;pos&#8217;: (x,y), &#8216;size&#8217;, &#8216;pen&#8217;, &#8216;brush&#8217;, &#8216;symbol&#8217;}. This is just an alternate method
+of passing in data for the corresponding arguments.</dd>
+</dl>
+<p><em>x</em>,*y*: 1D arrays of x,y values.
+<em>pos</em>:   2D structure of x,y pairs (such as Nx2 array or list of tuples)
+<em>pxMode</em>: If True, spots are always the same size regardless of scaling, and size is given in px.</p>
+<blockquote>
+<div>Otherwise, size is in scene coordinates and the spots scale with the view.
+Default is True</div></blockquote>
+<dl class="docutils">
+<dt><em>identical</em>: If True, all spots are forced to look identical. </dt>
+<dd>This can result in performance enhancement.
+Default is False</dd>
+<dt><em>symbol</em> can be one (or a list) of:</dt>
+<dd>&#8216;o&#8217;  circle (default)
+&#8216;s&#8217;  square
+&#8216;t&#8217;  triangle
+&#8216;d&#8217;  diamond
+&#8216;+&#8217;  plus</dd>
+</dl>
+<p><em>pen</em>: The pen (or list of pens) to use for drawing spot outlines.
+<em>brush</em>: The brush (or list of brushes) to use for filling spots.
+<em>size</em>: The size (or list of sizes) of spots. If <em>pxMode</em> is True, this value is in pixels. Otherwise,</p>
+<blockquote>
+<div>it is in the item&#8217;s local coordinate system.</div></blockquote>
+<p class="last"><em>data</em>: a list of python objects used to uniquely identify each spot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyqtgraph.ScatterPlotItem.setPoints">
+<tt class="descname">setPoints</tt><big>(</big><em>*args</em>, <em>**kargs</em><big>)</big><a class="headerlink" href="#pyqtgraph.ScatterPlotItem.setPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated; use setData</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plotcurveitem.html"
+                        title="previous chapter">PlotCurveItem</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plotitem.html"
+                        title="next chapter">PlotItem</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/graphicsItems/scatterplotitem.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plotitem.html" title="PlotItem"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plotcurveitem.html" title="PlotCurveItem"
+             >previous</a> |</li>
+        <li><a href="../index.html">pyqtgraph v1.8 documentation</a> &raquo;</li>
+          <li><a href="../apireference.html" >API Reference</a> &raquo;</li>
+          <li><a href="index.html" >Pyqtgraph&#8217;s Graphics Items</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Luke Campagnola.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
