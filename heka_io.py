@@ -10,8 +10,8 @@ from read_heka import *
 class HekaIO(BaseIO):
     is_readable = True
     is_writable = False
-    supported_objects = [Segment,AnalogSignal,EventArray]
-    readable_objects = [Segment,AnalogSignal]
+    supported_objects = [Segment,AnalogSignal,Block,EventArray]
+    readable_objects = [Segment,AnalogSignal,Block]
     writeable_objects = []
     has_header = True
     is_streameable = False
@@ -41,7 +41,6 @@ class HekaIO(BaseIO):
         head = BundleHeader(f)
         #load the file
         head.load(f)
-
         #print head
         #get the .pgf and .pul items in the file
         for bi in head.oBundleItems:
@@ -52,20 +51,72 @@ class HekaIO(BaseIO):
                 self.pul = PULFile(f,bi)
         f.close()
 
+    def read_block(self,
+                   lazy = False,
+                   cascade = True,
+                   group = 0):
+        blo = Block(name = 'test')
+        if cascade:
+            tree = getbyroute(self.pul.tree,[0,group])
+            #print tree['contents'].__dict__
+            for i,child in enumerate(tree['children']):
+                blo.segments.append(self.read_segment(group=group,series = i))
+            annotations = tree['contents'].__dict__.keys()
+            annotations.remove('readlist')
+            for a in annotations:
+                d = {a:str(tree['contents'].__dict__[a])}
+                blo.annotate(**d)
+        create_many_to_one_relationship(blo)
+        return blo
+
     def read_segment(self,
                     lazy = False,
-                    cascade = True):
+                    cascade = True,
+                    group = 0,
+                    series = 0):
         seg = Segment( name = 'test')
         if cascade:
-            seg.analogsignals = getleafs(self.pul.tree,open(self.filename))
+            tree = getbyroute(self.pul.tree,[0,group,series])
+            for sw,sweep in enumerate(tree['children']):
+                if sw == 0:
+                    starttime = pq.Quantity(float(sweep['contents'].swTimer),'s')
+                for ch,channel in enumerate(sweep['children']):
+                    sig = self.read_analogsignal(group=group,
+                                            series=series,
+                                            sweep=sw,
+                                            channel = ch)
+                    annotations = sweep['contents'].__dict__.keys()
+                    annotations.remove('readlist')
+                    for a in annotations:
+                        d = {a:str(sweep['contents'].__dict__[a])}
+                        sig.annotate(**d)
+                    sig.t_start = pq.Quantity(float(sig.annotations['swTimer']),'s') - starttime
+                    seg.analogsignals.append(sig)
+            annotations = tree['contents'].__dict__.keys()
+            annotations.remove('readlist')
+            for a in annotations:
+                d = {a:str(tree['contents'].__dict__[a])}
+                seg.annotate(**d)
         create_many_to_one_relationship(seg)
         return seg
 
     def read_analogsignal(self,
                         lazy = False,
-                        cascade = True):
-
-        pass
+                        cascade = True,
+                        group = 0,
+                        series = 0,
+                        sweep = 0,
+                        channel = 0):
+        tree = getbyroute(self.pul.tree,[0,group,series,sweep,channel])
+        f = open(self.filename)
+        sig = gettrace(tree['contents'],f)
+        f.close()
+        annotations = tree['contents'].__dict__.keys()
+        annotations.remove('readlist')
+        for a in annotations:
+            d = {a:str(tree['contents'].__dict__[a])}
+            sig.annotate(**d)
+        return sig
 
 def getleafs(tree_obj,f):
     if isinstance(tree_obj['contents'], TraceRecord):
@@ -79,8 +130,6 @@ def getleafs(tree_obj,f):
         return leaflist
 
 def gettrace(trec,f):
-    from quantities import ms,kHz,nA,mV
-    import ephys as ep
     import numpy as np
     format_type_lenghts = [2,4,4,8]
     format_type = [np.int16,np.int32,np.float32,np.float64]
@@ -90,12 +139,14 @@ def gettrace(trec,f):
     byte_string = f.read(int(trec.trDataPoints)*pointsize)
     import numpy as np
     ydata = np.fromstring(byte_string,dtype = dtype)
-    print ydata
-    print trec.trDataScaler
-    print pu(trec.trXUnit[0])
-    print trec.trXUnit[0]
-    tunit = pq.Quantity(1,trec.trXUnit)
-    yunit = pq.Quantity(1,trec.trYUnit)
-    return AnalogSignal(ydata*float(trec.trDataScaler)*yunit,
-                        sampling_period=float(trec.trXInterval)*tunit,
-                        units = trec.trYUnit[0])
+    tunit = pq.Quantity(1,str(trec.trXUnit))
+    yunit = pq.Quantity(1,str(trec.trYUnit))
+    sig = AnalogSignal(ydata*float(trec.trDataScaler)*yunit,
+            sampling_period=float(trec.trXInterval)*tunit,
+            units = trec.trYUnit[0])
+    annotations = trec.__dict__.keys()
+    annotations.remove('readlist')
+    for a in annotations:
+        d = {a:str(trec.__dict__[a])}
+        sig.annotate(**d)
+    return sig

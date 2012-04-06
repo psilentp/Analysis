@@ -11,7 +11,7 @@ import json
 class TreeFile(object):
     """Abstract class to read and parse a Tree-format type subfile.
     It is constructed by passing in the packed HEKA file and the bundle
-    item object of intrest---usually a member of the BundleHeader class"""
+    item object of interest---usually a member of the BundleHeader class"""
     def __init__(self,b_file,b_item): #bundle file, bundle item objects
         b_file.seek(int(b_item.oStart))
         mnumber = unpack('4s',b_file.read(4))

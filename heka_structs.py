@@ -48,7 +48,10 @@ class StringType(HEKA_type):
         self.frmt = str(self.size) +'s'
         
     def __str__(self):
-        return str(self.data).strip(u'\x00') or 'None'
+        try:
+            return str(self.data).strip(u'\x00') or 'None'
+        except UnicodeDecodeError:
+            return 'error'
         
 class BYTE(HEKA_type):
     def __init__(self):
@@ -435,7 +438,7 @@ class SeriesRecord(HEKA_record):
         self.seSwUserParamDescr     = ARRAY(4, UserParamDescrType())
         self.seFiller3              = ARRAY(32,CHAR())
         self.seSeUserParams         = ARRAY(4, LONGREAL())
-        self.seLockInParams         = StringType(96) # = 96, see "Pulsed.de" *)
+        self.seLockInParams         = ARRAY(96,BYTE()) # = 96, see "Pulsed.de" *)
         self.seAmplifierState       = StringType(400)
         self.seUsername             = StringType(80)
         self.seUserParamDescr1      = ARRAY(4, UserParamDescrType())
@@ -508,9 +511,11 @@ class TraceRecord(HEKA_record):
         'trLeakTraces','trDataKind',
         'trUseXStart',
         'trFiller1','trRecordingMode','trAmplIndex',
-        'trDataFormat','trDataAbscissa','trDataScaler','trTimeOffset',
-        'trZeroData','trYUnit','trXInterval','trXStart','trXUnit','trYRange',
-        'trYOffset','trBandwidth','trPipetteResistance','trCellPotential',
+        'trDataFormat','trDataAbscissa','trDataScaler','trTimeOffset','trZeroData',
+        'trYUnit','trYMaxStr',
+        'trXInterval','trXStart',
+        'trXUnit','trXMaxStr',
+        'trYRange','trYOffset','trBandwidth','trPipetteResistance','trCellPotential',
         'trSealResistance','trCSlow','trGSeries','trRsValue','trGLeak',
         'trMConductance','trLinkDAChannel','trValidYrange','trAdcMode',
         'trAdcChannel','trYmin','trYmax','trSourceChannel','trExternalSolution',
@@ -537,10 +542,12 @@ class TraceRecord(HEKA_record):
         self.trDataScaler            = LONGREAL()
         self.trTimeOffset            = LONGREAL()
         self.trZeroData              = LONGREAL()
-        self.trYUnit                 = StringType(8)
+        self.trYUnit                 = StringType(2) ### changed
+        self.trYMaxStr               = StringType(6) ### added
         self.trXInterval             = LONGREAL()
         self.trXStart                = LONGREAL()
-        self.trXUnit                 = StringType(8)
+        self.trXUnit                 = StringType(2) ### changed
+        self.trXMaxStr               = StringType(6) ### added
         self.trYRange                = LONGREAL()
         self.trYOffset               = LONGREAL()
         self.trBandwidth             = LONGREAL()
