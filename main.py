@@ -36,6 +36,8 @@ def _create_plot_component():
 
     firstplot = True
     for seg in blo.segments:
+        #prococol building
+        print seg.annotations
         for a_sig in seg.analogsignals:
             x = array(a_sig.times)
             y = array(a_sig)
@@ -44,6 +46,12 @@ def _create_plot_component():
             plot.index.sort_order = "ascending"
             plot.bgcolor = "white"
             plot.border_visible = True
+
+            #code for protocols
+            print "###########################"
+            for key in ['trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
+                print "%s:%s"%(key,a_sig.annotations[key])
+
             if not firstplot:
                 plot.value_mapper = value_mapper
                 value_mapper.range.add(plot.value)
@@ -118,6 +126,6 @@ class PlotFrame(DemoFrame):
         return Window(self, -1, component=_create_plot_component())
 
 if __name__ == "__main__":
-    #demo_main(PlotFrame, size=size, title=title)
-    print gbi()
+    demo_main(PlotFrame, size=size, title=title)
+    #print gbi()
     # EOF
