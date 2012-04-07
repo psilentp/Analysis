@@ -7,6 +7,28 @@ import numpy as np
 import quantities as pq
 from read_heka import *
 
+
+def gbi():
+    #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
+    filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    #filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    f = open(filename)
+    head = BundleHeader(f)
+    head.load(f)
+    bi = head.oBundleItems[2]
+    print bi
+    pgf = PGFFile(f,bi)
+    for i in pgf.tree['children']:
+        print len(i['children'])
+    for i in pgf.tree['children']:
+        print [str(sr['contents'].seDuration) for sr in i['children'][1]['children']]
+        print [str(sr['contents'].seVoltage) for sr in i['children'][1]['children']]
+        try:
+            print [str(sr['contents'].seVoltage) for sr in i['children'][2]['children']]
+        except IndexError:
+            print 'no level'
+    #return head,pgf
+
 class HekaIO(BaseIO):
     is_readable = True
     is_writable = False
@@ -33,7 +55,7 @@ class HekaIO(BaseIO):
     mode = 'file'
 
     def __init__(self,filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'):
-        print 'here'
+        #print 'here'
         BaseIO.__init__(self)
         self.filename = filename
         f = open(filename)

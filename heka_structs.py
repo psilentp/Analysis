@@ -9,8 +9,11 @@ class HEKA_type(object):
     def __init__(self,size):
         self.size = size
         
-    def read(self,read_file):
+    def read(self,read_file,debug = False):
         rstr = read_file.read(self.size)
+        if debug:
+            print type(self)
+            print repr(rstr)
         self.parse(rstr)
         
     def parse(self,rstr):
@@ -178,6 +181,12 @@ class HEKA_record(object):
                  rstr += (k + ':' + str(self.__dict__[k]) + '\n')
         return rstr
 
+    def read_size(self):
+        rsize = 0
+        for key in self.readlist:
+            rsize += self.__dict__[key].size
+        return rsize
+
 class BundleHeader(HEKA_record):
     def __init__(self,recordsize):
         self.readlist = ['oSignature', 'oVersion','oTime','oItems','fill',
@@ -206,15 +215,16 @@ class RootRecord_PGF(HEKA_record):
         self.roFiller1              = INT(4)
         self.roParams               = ARRAY(10,LONGREAL())
         self.roParamText            = ARRAY(10,StringType(32))
-        self.roReserved             = INT(4)
+        self.roReserved             = ARRAY(128,BYTE())
         self.roFiller2              = INT(4)
         self.roCRC                  = CARD(4)
         self.num_children           = NCHILD()
+
                                    
 class StimulationRecord(HEKA_record):
     def __init__(self,recordsize):
         self.recordsize = recordsize
-        self.readlist = ['stMark','stEntryName','stFileName''stAnalName',
+        self.readlist = ['stMark','stEntryName','stFileName','stAnalName',
                         'stDataStartSegment','stDataStartTime',
                         'stSampleInterval','stSweepInterval','stLeakDelay',
                         'stFilterFactor','stNumberSweeps','stNumberLeaks',
@@ -225,7 +235,9 @@ class StimulationRecord(HEKA_record):
                         'stBreakNext','stIsExpanded','stLeakCompMode',
                         'stHasChirp', 'stOldStartMacro','stOldEndMacro',
                         'sIsGapFree','sHandledExternally','stFiller1',
-                        'stFiller2','stCRC','stTag','num_children']
+                        'stFiller2','stCRC','num_children']
+        # removed
+        #'stTag' removed
         
         self.stMark                 = INT(4)
         self.stEntryName            = StringType(32)
@@ -261,8 +273,10 @@ class StimulationRecord(HEKA_record):
         self.stFiller1              = BOOLEAN()
         self.stFiller2              = BOOLEAN()
         self.stCRC                  = CARD(4)
-        self.stTag                  = StringType(32)
+        #self.stTag                  = StringType(32)
         self.num_children           = NCHILD()
+
+
         
 
 class ChannelRecord(HEKA_record):
@@ -281,8 +295,9 @@ class ChannelRecord(HEKA_record):
                          'chInfoLInt','chInfoIChar','chDacOffset','chAdcOffset',
                          'chTraceMathFormat','chHasChirp','chFiller3',
                          'chCompressionOffset','chPhotoMode','chBreakLevel',
-                         'chTraceMath','chOldCRC','chFiller4','chCRC',
+                         'chTraceMath','chOldCRC','chCRC',
                          'num_children']
+        #removed 'chFiller4'
         self.chMark                 = INT(4)
         self.chLinkedChannel        = INT(4)
         self.chCompressionFactor    = INT(4)
@@ -297,8 +312,8 @@ class ChannelRecord(HEKA_record):
         self.chDacChannel           = INT(2)
         self.chDacMode              = BYTE()
         self.chFiller1              = BYTE()
-        self.chRelevantXSegment     = INT(16)
-        self.chRelevantYSegment     = INT(16)
+        self.chRelevantXSegment     = INT(4)
+        self.chRelevantYSegment     = INT(4)
         self.chDacUnit              = StringType(8)
         self.chHolding              = LONGREAL()
         self.chLeakHolding          = LONGREAL()
@@ -328,7 +343,7 @@ class ChannelRecord(HEKA_record):
         self.chBreakLevel           = LONGREAL()
         self.chTraceMath            = StringType(128)
         self.chOldCRC               = CARD(4)
-        self.chFiller4              = INT(4)
+        #self.chFiller4              = INT(4)
         self.chCRC                  = CARD(4)
         self.num_children           = NCHILD()
 
@@ -337,7 +352,7 @@ class StimSegmentRecord(HEKA_record):
     def __init__(self,recordsize):
         self.recordsize = recordsize
         self.readlist = ['seMark','seClass','seDoStore','seVoltageIncMode',
-                        'seDurationIncMode','seVoltage','seVoltageSource', 
+                        'seDurationIncMode','seVoltage','seVoltageSource',
                         'seDeltaVFactor','seDeltaVIncrement','seDuration',
                         'seDurationSource','seDeltaTFactor','seDeltaTIncrement',
                         'seFiller1','seCRC','seScanRate','num_children']

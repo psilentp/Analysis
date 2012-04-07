@@ -1,7 +1,7 @@
 __author__ = 'psilentp'
 
 from numpy import array
-from heka_io import HekaIO
+from heka_io import HekaIO,gbi
 from chaco.example_support import COLOR_PALETTE
 from enable.example_support import DemoFrame, demo_main
 # Enthought library imports
@@ -14,6 +14,7 @@ from chaco.api import create_line_plot, add_default_axes,\
     create_scatter_plot, Legend
 from chaco.tools.api import PanTool, ZoomTool, LegendTool,\
     TraitsTool, DragZoom
+
 
 #===============================================================================
 # # Create the Chaco plot.
@@ -117,5 +118,6 @@ class PlotFrame(DemoFrame):
         return Window(self, -1, component=_create_plot_component())
 
 if __name__ == "__main__":
-    demo_main(PlotFrame, size=size, title=title)
+    #demo_main(PlotFrame, size=size, title=title)
+    print gbi()
     # EOF

@@ -13,13 +13,21 @@ class TreeFile(object):
     It is constructed by passing in the packed HEKA file and the bundle
     item object of interest---usually a member of the BundleHeader class"""
     def __init__(self,b_file,b_item): #bundle file, bundle item objects
+        self.b_item = b_item
         b_file.seek(int(b_item.oStart))
         mnumber = unpack('4s',b_file.read(4))
         assert(mnumber[0] in "eerT") #  assert the magic number
         self.num_levels = unpack('L',b_file.read(4))[0] #get the number of lev
         self.l_sizes = list() #list to hold the number of levels
+        #(self.num_levels):
         for l in range(self.num_levels):
             self.l_sizes.append(unpack('L',b_file.read(4))[0])
+        print 'lev sizes:' + str(self.l_sizes)
+        #if len(self.l_sizes) == 4:
+        #    b_file.read(4)
+        #print 'contents:' + str(repr(b_file.read(self.l_sizes[0])))
+        #print 'num_children:'+ str(unpack('L',b_file.read(4)))
+
 
     def load_level(self,level,b_file):
         #pack_str = str(self.pack_strs[level]) + 'L'
@@ -28,11 +36,26 @@ class TreeFile(object):
         #contents = self.record_classes[level](self.l_sizes[level])
         #pass the level size to the constructor to ensure that the level size is
         #as expected, then call self.contents.read(b_file)
+        #print level
+                #print len(self.record_classes)
+        #print len(self.l_sizes)
+
         contents = self.record_classes[level](self.l_sizes[level])
         contents.load(b_file)
+        #print self.l_sizes[level]
+        #print contents.read_size()-4
+        #print contents
+
         #print contents.__dict__
+        #print 'reading %s bytes'%self.l_sizes[level]
+        #bytestr = repr(b_file.read(self.l_sizes[level]))
+        #print bytestr
         children = list()
         node = {'contents':contents,'children':children}
+        #num_children = unpack('L',b_file.read(4))[0]
+        #print 'num_chil: ' + str(num_children)
+        #for child in range(num_children):
+        #    self.load_level(level+1,b_file)
         for child in range(contents.num_children):
             node['children'].append(self.load_level(level+1,b_file))
         return node
@@ -55,11 +78,12 @@ class PGFFile(TreeFile):
     def __init__(self,b_file,b_item):
         TreeFile.__init__(self,b_file,b_item)
         RootRecSize             = 584
-        StimulationRecSize      = 280
+        StimulationRecSize      = 248
         ChannelRecSize          = 400
         StimSegmentRecSize      = 80
-        #assert([RootRecSize,StimulationRecSize,
-        #        ChannelRecSize,StimSegmentRecSize] == self.l_sizes)
+        #print self.l_sizes
+        assert([RootRecSize,StimulationRecSize,
+                ChannelRecSize,StimSegmentRecSize] == self.l_sizes)
         self.record_classes = (RootRecord_PGF,
                                StimulationRecord,
                                ChannelRecord,
