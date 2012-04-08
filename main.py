@@ -14,7 +14,7 @@ from chaco.api import create_line_plot, add_default_axes,\
     create_scatter_plot, Legend
 from chaco.tools.api import PanTool, ZoomTool, LegendTool,\
     TraitsTool, DragZoom
-
+from read_heka import *
 
 #===============================================================================
 # # Create the Chaco plot.
@@ -24,11 +24,18 @@ def _create_plot_component():
         bgcolor = "lightgray", use_backbuffer=True)
 
     fprefix = './test_data/CEN184/'
-    filename1 = fprefix + 'THL_2012-03-21_18-40-42_000.dat'
-    filename2  = fprefix + 'THL_2012-03-21_18-44-42_000.dat'
-    ioreader = HekaIO(filename1)
+    #filename1 = fprefix + 'THL_2012-03-21_18-40-42_000.dat'
+    #filename2  = fprefix + 'THL_2012-03-21_18-44-42_000.dat'
+    filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    ioreader = HekaIO(filename)
     #read a block
-    blo = ioreader.read_block(group = 3)
+    blo = ioreader.read_block(group = 4)
+
+    f = open(filename)
+    head = BundleHeader(f)
+    head.load(f)
+    bi = head.oBundleItems[2]
+    pgf = PGFFile(f,bi)
 
     value_mapper = None
     index_mapper = None
@@ -37,7 +44,7 @@ def _create_plot_component():
     firstplot = True
     for seg in blo.segments:
         #prococol building
-        print seg.annotations
+        #print seg.annotations
         for a_sig in seg.analogsignals:
             x = array(a_sig.times)
             y = array(a_sig)
@@ -49,7 +56,8 @@ def _create_plot_component():
 
             #code for protocols
             print "###########################"
-            for key in ['trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
+            print pgf.tree['children'][a_sig.annotations['pgf_index']]['children'][0]['children'][1]['contents'].seVoltage
+            for key in ['pgf_index','trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
                 print "%s:%s"%(key,a_sig.annotations[key])
 
             if not firstplot:

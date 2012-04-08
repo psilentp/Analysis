@@ -10,8 +10,8 @@ from read_heka import *
 
 def gbi():
     #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
-    filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
-    #filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
     f = open(filename)
     head = BundleHeader(f)
     head.load(f)
@@ -138,6 +138,7 @@ class HekaIO(BaseIO):
         for a in annotations:
             d = {a:str(tree['contents'].__dict__[a])}
             sig.annotate(**d)
+        sig.annotate(pgf_index = series_count(self.pul,[0,group,series]))
         return sig
 
 def getleafs(tree_obj,f):

@@ -162,6 +162,14 @@ def getbyroute(tree_obj,route):
         tree_obj = tree_obj[turn]
     return tree_obj
 
+def series_count(pul,route):
+    count = 0
+    for i in range(route[1]):
+        tree = pul.tree['children'][i]
+        count += int(tree['contents'].num_children)
+    count += route[2]
+    return count
+
 def gettrace(trec,f):
     import ephys as ep
     import numpy as np
