@@ -10,23 +10,31 @@ from read_heka import *
 
 def gbi():
     #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
-    filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
-    #filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
     f = open(filename)
     head = BundleHeader(f)
     head.load(f)
     bi = head.oBundleItems[2]
     print bi
     pgf = PGFFile(f,bi)
-    for i in pgf.tree['children']:
-        print len(i['children'])
-    for i in pgf.tree['children']:
-        print [str(sr['contents'].seDuration) for sr in i['children'][1]['children']]
-        print [str(sr['contents'].seVoltage) for sr in i['children'][1]['children']]
-        try:
-            print [str(sr['contents'].seVoltage) for sr in i['children'][2]['children']]
-        except IndexError:
-            print 'no level'
+    #for i in pgf.tree['children']:
+    #    print len(i['children'])
+    count = 0
+    for g1i,group1 in enumerate(pgf.tree['children']):
+        print "---new child in root---"
+        for g2i,group2 in enumerate(group1['children']):
+            count += 1
+            print 'Count:%s'%(count)
+            #print 'chLinkedChannel:' + str(group2['contents'].chLinkedChannel)
+            #print (g1i,g2i)
+            print [str(group3['contents'].seVoltage) for group3 in group2['children']]
+        #print [str(sr['contents'].seDuration) for sr in i['children'][1]['children']]
+        #print [str(sr['contents'].seVoltage) for sr in i['children'][1]['children']]
+        #try:
+        #    print [str(sr['contents'].seVoltage) for sr in i['children'][2]['children']]
+        #except IndexError:
+        #    print 'no level'
     #return head,pgf
 
 class HekaIO(BaseIO):
