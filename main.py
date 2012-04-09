@@ -1,6 +1,7 @@
 __author__ = 'psilentp'
 
 from numpy import array
+from neo.io import axonio
 from heka_io import HekaIO,gbi
 from chaco.example_support import COLOR_PALETTE
 from enable.example_support import DemoFrame, demo_main
@@ -26,16 +27,11 @@ def _create_plot_component():
     fprefix = './test_data/CEN184/'
     #filename1 = fprefix + 'THL_2012-03-21_18-40-42_000.dat'
     #filename2  = fprefix + 'THL_2012-03-21_18-44-42_000.dat'
-    filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
-    ioreader = HekaIO(filename)
+    filename = './test_data/CEN914/2008_12_04_0015.abf'
+    #ioreader = HekaIO(filename)
+    ioreader = axonio.AxonIO(filename)
     #read a block
-    blo = ioreader.read_block(group = 4)
-
-    f = open(filename)
-    head = BundleHeader(f)
-    head.load(f)
-    bi = head.oBundleItems[2]
-    pgf = PGFFile(f,bi)
+    blo = ioreader.read()
 
     value_mapper = None
     index_mapper = None
@@ -43,22 +39,15 @@ def _create_plot_component():
 
     firstplot = True
     for seg in blo.segments:
-        #prococol building
-        #print seg.annotations
         for a_sig in seg.analogsignals:
             x = array(a_sig.times)
             y = array(a_sig)
-            ch = int(a_sig.annotations['trSourceChannel'])
+            ch = 3
+            #ch = int(a_sig.annotations['trSourceChannel'])
             plot = create_line_plot((x,y), width=0.5,color=tuple(COLOR_PALETTE[ch]))
             plot.index.sort_order = "ascending"
             plot.bgcolor = "white"
             plot.border_visible = True
-
-            #code for protocols
-            print "###########################"
-            print pgf.tree['children'][a_sig.annotations['pgf_index']]['children'][0]['children'][1]['contents'].seVoltage
-            for key in ['pgf_index','trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
-                print "%s:%s"%(key,a_sig.annotations[key])
 
             if not firstplot:
                 plot.value_mapper = value_mapper
@@ -90,14 +79,14 @@ def _create_plot_component():
                 plot.overlays.append(legend)
                 firstplot = False
             container.add(plot)
-            plots["sweep %s"%a_sig.annotations['trLabel'][:4]] = plot
+            #plots["sweep %s"%a_sig.annotations['trLabel'][:4]] = plot
             # Set the list of plots on the legend
     legend.plots = plots
     # Add the title at the top
-    container.overlays.append(PlotLabel(blo.annotations['grLabel'],
-        component=container,
-        font = "swiss 16",
-        overlay_position="top"))
+    #container.overlays.append(PlotLabel(blo.annotations['grLabel'],
+    #    component=container,
+    #    font = "swiss 16",
+    #    overlay_position="top"))
     # Add the traits inspector tool to the container
     container.tools.append(TraitsTool(container))
 
