@@ -33,7 +33,7 @@ def _create_plot_component():
     ioreader = HekaIO(filename3)
 
     #read a block
-    blo = ioreader.read_block(group = 1)
+    blo = ioreader.read_block(group = 2)
 
     #protocol stuff
     f = open(filename1)
@@ -61,7 +61,12 @@ def _create_plot_component():
             #code for protocols
 
             print "###########################"
-            print pgf.tree['children'][a_sig.annotations['pgf_index']]['children'][0]['children'][1]['contents'].seVoltage
+            st_rec = pgf.tree['children'][a_sig.annotations['pgf_index']]['contents']
+            se_rec = pgf.tree['children'][a_sig.annotations['pgf_index']]['children'][0]['children'][1]['contents']
+            for key in ['stMark','stDataStartSegment','stDataStartTime']:
+                print key+ ' ' +str(st_rec.__dict__[key])
+            for key in ['seVoltageIncMode','seDuration','seDurationIncMode','seVoltage',]:
+                print key+' '+str(se_rec.__dict__[key])
             for key in ['pgf_index','trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
 
                 print "%s:%s"%(key,a_sig.annotations[key])
