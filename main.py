@@ -2,6 +2,7 @@ __author__ = 'psilentp'
 
 from numpy import array
 from heka_io import HekaIO,gbi
+from read_heka import *
 from chaco.example_support import COLOR_PALETTE
 from enable.example_support import DemoFrame, demo_main
 # Enthought library imports
@@ -24,14 +25,18 @@ def _create_plot_component():
         bgcolor = "lightgray", use_backbuffer=True)
 
     fprefix = './test_data/CEN184/'
-    #filename1 = fprefix + 'THL_2012-03-21_18-40-42_000.dat'
-    #filename2  = fprefix + 'THL_2012-03-21_18-44-42_000.dat'
-    filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
-    ioreader = HekaIO(filename)
-    #read a block
-    blo = ioreader.read_block(group = 4)
 
-    f = open(filename)
+    filename1 = fprefix + 'THL_2012-03-21_18-40-42_000.dat'
+    filename2  = fprefix + 'THL_2012-03-21_18-44-42_000.dat'
+    fprefix = './test_data/CEN111/'
+    filename3 = fprefix + 'THL_2011-07-09_15-02-54_000.dat'
+    ioreader = HekaIO(filename3)
+
+    #read a block
+    blo = ioreader.read_block(group = 1)
+
+    #protocol stuff
+    f = open(filename1)
     head = BundleHeader(f)
     head.load(f)
     bi = head.oBundleItems[2]
@@ -44,7 +49,6 @@ def _create_plot_component():
     firstplot = True
     for seg in blo.segments:
         #prococol building
-        #print seg.annotations
         for a_sig in seg.analogsignals:
             x = array(a_sig.times)
             y = array(a_sig)
@@ -55,11 +59,16 @@ def _create_plot_component():
             plot.border_visible = True
 
             #code for protocols
+
             print "###########################"
             print pgf.tree['children'][a_sig.annotations['pgf_index']]['children'][0]['children'][1]['contents'].seVoltage
             for key in ['pgf_index','trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
-                print "%s:%s"%(key,a_sig.annotations[key])
 
+                print "%s:%s"%(key,a_sig.annotations[key])
+                #se_index = int(seg.annotations['seSeriesCount']) -1
+                #sw_index = int(a_sig.annotations['swSweepCount']) -1
+                #st_index = int(a_sig.annotations['swStimCount']) -1
+            #print pgf.tree['children'][se_index]['children'][st_index]['children'][1]['contents'].seVoltage
             if not firstplot:
                 plot.value_mapper = value_mapper
                 value_mapper.range.add(plot.value)
@@ -134,6 +143,6 @@ class PlotFrame(DemoFrame):
         return Window(self, -1, component=_create_plot_component())
 
 if __name__ == "__main__":
-    demo_main(PlotFrame, size=size, title=title)
-    #print gbi()
+    #demo_main(PlotFrame, size=size, title=title)
+    gbi()
     # EOF

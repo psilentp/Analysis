@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b694d11a-0b6d-4e3d-9e96-2dcac79cc1e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt" afterPath="$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/heka_io.py" afterPath="$PROJECT_DIR$/heka_io.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/read_heka.py" afterPath="$PROJECT_DIR$/read_heka.py" />
     </list>
     <ignored path="Analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,27 +22,62 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
+  <component name="DockManager">
+    <window id="2">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="PulsedFile_v9.txt" pinned="false" current="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state line="135" column="13" selection-start="4501" selection-end="4507" vertical-scroll-proportion="0.024590164">
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="StimFile_v9.txt" pinned="false" current="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state line="146" column="6" selection-start="5333" selection-end="5334" vertical-scroll-proportion="0.0">
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="Analysis" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="heka_io.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/heka_io.py">
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="67" selection-start="424" selection-end="487" vertical-scroll-proportion="0.0">
+            <state line="62" column="47" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.py">
+      <file leaf-file-name="heka_io.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/heka_io.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="14" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.40358743">
-              <folding>
-                <element signature="e#25#48#0" expanded="true" />
-              </folding>
+            <state line="10" column="0" selection-start="271" selection-end="271" vertical-scroll-proportion="0.08946322">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="axonio.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/io/axonio.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="609" column="24" selection-start="24585" selection-end="24593" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -56,19 +91,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="read_heka.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/read_heka.py">
+      <file leaf-file-name="FileFormat.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FileFormat_v9/FileFormat.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="16" selection-start="6383" selection-end="6383" vertical-scroll-proportion="0.0">
+            <state line="419" column="47" selection-start="12912" selection-end="12917" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StimFile_v9.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
+      <file leaf-file-name="DataFile_v9.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FileFormat_v9/DataFile_v9.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="12" selection-start="4662" selection-end="4671" vertical-scroll-proportion="0.0">
+            <state line="111" column="0" selection-start="4120" selection-end="4120" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -89,15 +124,15 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/read_heka.py" />
+        <option value="$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt" />
         <option value="$PROJECT_DIR$/heka_io.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="457" />
-    <option name="y" value="22" />
+    <option name="x" value="39" />
+    <option name="y" value="31" />
     <option name="width" value="1412" />
     <option name="height" value="909" />
   </component>
@@ -134,6 +169,80 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Analysis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.2 (/Library/Frameworks/Python.framework/Versions/7.2/bin/python2.7) &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Analysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.2 (/Library/Frameworks/Python.framework/Versions/7.2/bin/python2.7) &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neo-0.2.0-py2.7.egg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Analysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.2 (/Library/Frameworks/Python.framework/Versions/7.2/bin/python2.7) &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neo-0.2.0-py2.7.egg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Analysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; Python 2.7.2 (/Library/Frameworks/Python.framework/Versions/7.2/bin/python2.7) &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="neo-0.2.0-py2.7.egg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -265,18 +374,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="457" y="22" width="1412" height="909" extended-state="0" />
+    <frame x="39" y="31" width="1412" height="909" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27565983" sideWeight="0.5987342" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27565983" sideWeight="0.6708861" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40126583" sideWeight="0.9949091" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32911393" sideWeight="0.9949091" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -344,11 +453,14 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-4.5832243" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/read_heka.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.01965924" />
+      </provider>
+    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/io/axonio.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="609" column="24" selection-start="24585" selection-end="24593" vertical-scroll-proportion="11.439056">
-          <folding />
-        </state>
+        <state line="609" column="24" selection-start="24585" selection-end="24593" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/heka_structs.py">
@@ -356,33 +468,41 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/read_heka.py">
+    <entry file="file://$PROJECT_DIR$/FileFormat_v9/FileFormat.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="16" selection-start="6383" selection-end="6383" vertical-scroll-proportion="0.0">
+        <state line="419" column="47" selection-start="12912" selection-end="12917" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileFormat_v9/DataFile_v9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="0" selection-start="4120" selection-end="4120" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="13" selection-start="4501" selection-end="4507" vertical-scroll-proportion="0.024590164">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="12" selection-start="4662" selection-end="4671" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heka_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="67" selection-start="424" selection-end="487" vertical-scroll-proportion="0.0">
+        <state line="146" column="6" selection-start="5333" selection-end="5334" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="14" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.40358743">
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
+        <state line="62" column="47" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heka_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="271" selection-end="271" vertical-scroll-proportion="0.08946322">
+          <folding />
         </state>
       </provider>
     </entry>
