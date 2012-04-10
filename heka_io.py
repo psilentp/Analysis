@@ -23,16 +23,18 @@ def gbi():
     #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
     ioreader = HekaIO(filename)
-    blo = ioreader.read_block(group = 9)
+    blo = ioreader.read_block(group = 0)
     for seg in blo.segments:
         ax1 = plb.subplot(2,1,1)
         x,y = get_stimtrace(seg.epochs)
-        plb.plot(x,y)
+        plb.plot(x,y,'o-')
         plb.subplot(2,1,2,sharex = ax1)
         for a_sig in seg.analogsignals:
+            for key in ioreader.pgf.tree['children'][a_sig.annotations['pgf_index']]['contents'].__dict__:
+                print key + ':' + str(ioreader.pgf.tree['children'][a_sig.annotations['pgf_index']]['contents'].__dict__[key])
             x = np.array(a_sig.times)
             y = np.array(a_sig)
-            plb.plot(x,y)
+            plb.plot(x,y,)
     plb.show()
 
 class HekaIO(BaseIO):
@@ -138,11 +140,18 @@ class HekaIO(BaseIO):
                 se_rec = se_epoch['contents']
                 se_duration = pq.Quantity(float(se_rec.seDuration),'s')
                 se_voltage = se_rec.seVoltage
+                if not se_rec.seVoltage.data:
+                    se_voltage = self.pgf.tree['children'][pgf_index]['children'][0]['contents'].chHolding
                 epoch = neo.Epoch(ep_start,se_duration,se_voltage)
                 ep_start = ep_start + se_duration
-                print se_duration
-                print ep_start
+                #print se_duration
+                #print ep_start
                 seg.epochs.append(epoch)
+            #final_duration = pq.Quantity(float(st_rec.stSweepInterval),'s') - ep_start + sig.t_start
+            #print ep_start
+            #print final_duration
+            #epoch = neo.Epoch(ep_start,final_duration,-0.04)
+            #seg.epochs.append(epoch)
         return seg
 
     def read_analogsignal(self,
