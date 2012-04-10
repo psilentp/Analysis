@@ -39,7 +39,7 @@
             <file leaf-file-name="StimFile_v9.txt" pinned="false" current="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="125" column="3" selection-start="4448" selection-end="4448" vertical-scroll-proportion="0.40924656">
+                  <state line="111" column="41" selection-start="4108" selection-end="4108" vertical-scroll-proportion="0.049657535">
                     <folding />
                   </state>
                 </provider>
@@ -76,7 +76,7 @@
       <file leaf-file-name="heka_io.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/heka_io.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="6" selection-start="878" selection-end="878" vertical-scroll-proportion="0.5625">
+            <state line="197" column="0" selection-start="7631" selection-end="7631" vertical-scroll-proportion="1.21875">
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -397,13 +397,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="60" width="1412" height="909" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2851906" sideWeight="0.6696203" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2851906" sideWeight="0.6696203" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -489,7 +489,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="3" selection-start="4448" selection-end="4448" vertical-scroll-proportion="0.40924656">
+        <state line="111" column="41" selection-start="4108" selection-end="4108" vertical-scroll-proportion="0.049657535">
           <folding />
         </state>
       </provider>
@@ -564,7 +564,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/heka_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="6" selection-start="878" selection-end="878" vertical-scroll-proportion="0.5625">
+        <state line="197" column="0" selection-start="7631" selection-end="7631" vertical-scroll-proportion="1.21875">
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>

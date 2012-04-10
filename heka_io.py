@@ -7,7 +7,6 @@ import numpy as np
 import quantities as pq
 from read_heka import *
 
-
 def gbi():
     def get_stimtrace(epochs):
         times = []
@@ -55,11 +54,9 @@ class HekaIO(BaseIO):
                 {'value': 8, 'label': 'Number of recording points'})
         ]
     }
-
     write_params = None
     name = 'example'
     extentions = ['nof']
-
     mode = 'file'
 
     def __init__(self,filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'):
@@ -88,7 +85,6 @@ class HekaIO(BaseIO):
         blo = Block(name = 'test')
         if cascade:
             tree = getbyroute(self.pul.tree,[0,group])
-            #print tree['contents'].__dict__
             for i,child in enumerate(tree['children']):
                 blo.segments.append(self.read_segment(group=group,series = i))
             annotations = tree['contents'].__dict__.keys()
@@ -128,14 +124,10 @@ class HekaIO(BaseIO):
                 d = {a:str(tree['contents'].__dict__[a])}
                 seg.annotate(**d)
         create_many_to_one_relationship(seg)
-
-
         ### add protocols to signals
-        #ep_start = pq.Quantity(0,'s')
         for sig in seg.analogsignals:
             pgf_index = sig.annotations['pgf_index']
             st_rec = self.pgf.tree['children'][pgf_index]['contents']
-            ActualDacChannels = int(st_rec.stActualDacChannels)
             chnls = [ch for ch in self.pgf.tree['children'][pgf_index]['children']]
             for chnl in chnls:
                 print chnl
@@ -149,11 +141,6 @@ class HekaIO(BaseIO):
                     epoch = neo.Epoch(ep_start,se_duration,'protocol_epoch',value=se_voltage,channel=chnl_num)
                     ep_start = ep_start + se_duration
                     seg.epochs.append(epoch)
-            #final_duration = pq.Quantity(float(st_rec.stSweepInterval),'s') - ep_start + sig.t_start
-            #print ep_start
-            #print final_duration
-            #epoch = neo.Epoch(ep_start,final_duration,-0.04)
-            #seg.epochs.append(epoch)
         return seg
 
     def read_analogsignal(self,
