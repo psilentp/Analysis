@@ -12,26 +12,26 @@ def gbi():
     def get_stimtrace(epochs):
         times = []
         vms = []
+        print epochs
         for ep in epochs:
-            times.append(float(ep.time))
-            vms.append(float(ep.label))
-            times.append(float(ep.time)+float(ep.duration))
-            vms.append(ep.label)
+            if ep.annotations['channel'] == 3:
+                times.append(float(ep.time))
+                vms.append(float(ep.annotations['value']))
+                times.append(float(ep.time)+float(ep.duration))
+                vms.append(ep.annotations['value'])
         return (np.array(times),np.array(vms))
     import pylab as plb
     #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
     #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
     ioreader = HekaIO(filename)
-    blo = ioreader.read_block(group = 0)
+    blo = ioreader.read_block(group = 7)
     for seg in blo.segments:
         ax1 = plb.subplot(2,1,1)
         x,y = get_stimtrace(seg.epochs)
         plb.plot(x,y,'o-')
         plb.subplot(2,1,2,sharex = ax1)
         for a_sig in seg.analogsignals:
-            for key in ioreader.pgf.tree['children'][a_sig.annotations['pgf_index']]['contents'].__dict__:
-                print key + ':' + str(ioreader.pgf.tree['children'][a_sig.annotations['pgf_index']]['contents'].__dict__[key])
             x = np.array(a_sig.times)
             y = np.array(a_sig)
             plb.plot(x,y,)
@@ -134,19 +134,21 @@ class HekaIO(BaseIO):
         #ep_start = pq.Quantity(0,'s')
         for sig in seg.analogsignals:
             pgf_index = sig.annotations['pgf_index']
-            ep_start = sig.t_start
             st_rec = self.pgf.tree['children'][pgf_index]['contents']
-            for se_epoch in self.pgf.tree['children'][pgf_index]['children'][0]['children']:
-                se_rec = se_epoch['contents']
-                se_duration = pq.Quantity(float(se_rec.seDuration),'s')
-                se_voltage = se_rec.seVoltage
-                if not se_rec.seVoltage.data:
-                    se_voltage = self.pgf.tree['children'][pgf_index]['children'][0]['contents'].chHolding
-                epoch = neo.Epoch(ep_start,se_duration,se_voltage)
-                ep_start = ep_start + se_duration
-                #print se_duration
-                #print ep_start
-                seg.epochs.append(epoch)
+            ActualDacChannels = int(st_rec.stActualDacChannels)
+            chnls = [ch for ch in self.pgf.tree['children'][pgf_index]['children']]
+            for chnl in chnls:
+                print chnl
+                ep_start = sig.t_start
+                for se_epoch in chnl['children']:
+                    se_rec = se_epoch['contents']
+                    se_duration = pq.Quantity(float(se_rec.seDuration),'s')
+                    se_voltage = pq.Quantity(float(se_rec.seVoltage),'V')
+                    chnl_num = int(chnl['contents'].chDacChannel)
+                    print chnl_num
+                    epoch = neo.Epoch(ep_start,se_duration,'protocol_epoch',value=se_voltage,channel=chnl_num)
+                    ep_start = ep_start + se_duration
+                    seg.epochs.append(epoch)
             #final_duration = pq.Quantity(float(st_rec.stSweepInterval),'s') - ep_start + sig.t_start
             #print ep_start
             #print final_duration
