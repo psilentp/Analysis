@@ -16,6 +16,17 @@ from chaco.api import create_line_plot, add_default_axes,\
 from chaco.tools.api import PanTool, ZoomTool, LegendTool,\
     TraitsTool, DragZoom
 from read_heka import *
+import numpy as np
+
+def get_stimtrace(epochs):
+    times = []
+    vms = []
+    for ep in epochs:
+        times.append(float(ep.time)*1.01)
+        vms.append(float(ep.label))
+        times.append(float(ep.time)+float(ep.duration))
+        vms.append(ep.label)
+    return (np.array(times),np.array(vms))
 
 #===============================================================================
 # # Create the Chaco plot.
@@ -48,15 +59,19 @@ def _create_plot_component():
 
     firstplot = True
     for seg in blo.segments:
+
         #prococol building
         for a_sig in seg.analogsignals:
             x = array(a_sig.times)
             y = array(a_sig)
+
             ch = int(a_sig.annotations['trSourceChannel'])
             plot = create_line_plot((x,y), width=0.5,color=tuple(COLOR_PALETTE[ch]))
             plot.index.sort_order = "ascending"
             plot.bgcolor = "white"
             plot.border_visible = True
+
+
 
             #code for protocols
 
@@ -99,9 +114,24 @@ def _create_plot_component():
                 plot.overlays.append(legend)
                 firstplot = False
             container.add(plot)
-            plots["sweep %s"%a_sig.annotations['trLabel'][:4]] = plot
+            #plots["sweep %s"%a_sig.annotations['trLabel'][:4]] = plot
             # Set the list of plots on the legend
-    legend.plots = plots
+        ch = 0
+        ex,ey = get_stimtrace(seg.epochs)
+        print ex
+        print ey
+        plot = create_line_plot((ex,ey), width=0.5,color=tuple(COLOR_PALETTE[ch]))
+        plot.index.sort_order = "ascending"
+        plot.bgcolor = "white"
+        plot.border_visible = True
+        plot.value_mapper = value_mapper
+        value_mapper.range.add(plot.value)
+        plot.index_mapper = index_mapper
+        index_mapper.range.add(plot.index)
+        container.add(plot)
+        #plots["sweep %s"%a_sig.annotations['trLabel'][:4]] = plot
+
+    #legend.plots = plots
     # Add the title at the top
     container.overlays.append(PlotLabel(blo.annotations['grLabel'],
         component=container,

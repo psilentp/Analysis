@@ -128,6 +128,23 @@ class HekaIO(BaseIO):
                 d = {a:str(tree['contents'].__dict__[a])}
                 seg.annotate(**d)
         create_many_to_one_relationship(seg)
+
+
+        ### add protocols to signals
+        ep_start = pq.Quantity(0,'s')
+        for sig in seg.analogsignals:
+            pgf_index = sig.annotations['pgf_index']
+            st_rec = self.pgf.tree['children'][pgf_index]['contents']
+
+            for se_epoch in self.pgf.tree['children'][pgf_index]['children'][0]['children']:
+                se_rec = se_epoch['contents']
+                se_duration = pq.Quantity(float(se_rec.seDuration),'s')
+                se_voltage = se_rec.seVoltage
+                epoch = neo.Epoch(ep_start,se_duration,se_voltage)
+                ep_start = ep_start + se_duration
+                print se_duration
+                print ep_start
+                seg.epochs.append(epoch)
         return seg
 
     def read_analogsignal(self,
@@ -148,11 +165,6 @@ class HekaIO(BaseIO):
             sig.annotate(**d)
         pgf_index = series_count(self.pul,[0,group,series])
         sig.annotate(pgf_index = pgf_index)
-        p_source = self.pgf.tree['children'][pgf_index][0]['children']
-
-        for stim_rec in [x['contents'] for x in p_source]:
-            stim_epoch = neo.Epoch(stim_rec.)
-            sig.segment.epochs.append(neo.Epoch)
         return sig
 
 def getleafs(tree_obj,f):
