@@ -37,7 +37,7 @@
             <file leaf-file-name="StimFile_v9.txt" pinned="false" current="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="130" column="45" selection-start="4704" selection-end="4704" vertical-scroll-proportion="0.48360655">
+                  <state line="194" column="42" selection-start="7502" selection-end="7502" vertical-scroll-proportion="0.016393442">
                     <folding />
                   </state>
                 </provider>
@@ -53,10 +53,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="32" selection-start="587" selection-end="587" vertical-scroll-proportion="0.3416149">
+            <state line="13" column="28" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -71,11 +71,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="heka_io.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="heka_io.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/heka_io.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="17" selection-start="5494" selection-end="5494" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="23" column="58" selection-start="816" selection-end="816" vertical-scroll-proportion="0.24844721">
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,16 +121,7 @@
       <file leaf-file-name="FileFormat.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FileFormat_v9/FileFormat.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="419" column="47" selection-start="12912" selection-end="12917" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataFile_v9.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FileFormat_v9/DataFile_v9.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="0" selection-start="4120" selection-end="4120" vertical-scroll-proportion="0.0">
+            <state line="404" column="0" selection-start="12404" selection-end="12404" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -150,14 +143,14 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt" />
-        <option value="$PROJECT_DIR$/heka_io.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/heka_io.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="88" />
-    <option name="y" value="62" />
+    <option name="x" value="71" />
+    <option name="y" value="195" />
     <option name="width" value="1412" />
     <option name="height" value="909" />
   </component>
@@ -413,7 +406,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="88" y="62" width="1412" height="909" extended-state="0" />
+    <frame x="71" y="195" width="1412" height="909" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -504,16 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FileFormat_v9/FileFormat.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="419" column="47" selection-start="12912" selection-end="12917" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FileFormat_v9/DataFile_v9.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="0" selection-start="4120" selection-end="4120" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="135" column="13" selection-start="4501" selection-end="4507" vertical-scroll-proportion="0.0">
@@ -523,14 +506,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="45" selection-start="4704" selection-end="4704" vertical-scroll-proportion="0.48360655">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/analogsignal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="6" selection-start="9327" selection-end="9327" vertical-scroll-proportion="0.0">
+        <state line="194" column="42" selection-start="7502" selection-end="7502" vertical-scroll-proportion="0.016393442">
           <folding />
         </state>
       </provider>
@@ -549,13 +525,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/chaco/lineplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="0" selection-start="6172" selection-end="6172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/io/axonio.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="608" column="0" selection-start="24568" selection-end="24568" vertical-scroll-proportion="0.0">
@@ -568,17 +537,47 @@
         <state line="22" column="0" selection-start="475" selection-end="855" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heka_io.py">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/chaco/lineplot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="17" selection-start="5494" selection-end="5494" vertical-scroll-proportion="0.0">
+        <state line="174" column="0" selection-start="6172" selection-end="6172" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/analogsignal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="230" column="6" selection-start="9327" selection-end="9327" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileFormat_v9/DataFile_v9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="0" selection-start="4120" selection-end="4120" vertical-scroll-proportion="0.5531915">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileFormat_v9/FileFormat.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="404" column="0" selection-start="12404" selection-end="12404" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="32" selection-start="587" selection-end="587" vertical-scroll-proportion="0.3416149">
+        <state line="13" column="28" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heka_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="58" selection-start="816" selection-end="816" vertical-scroll-proportion="0.24844721">
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

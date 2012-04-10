@@ -9,33 +9,31 @@ from read_heka import *
 
 
 def gbi():
+    def get_stimtrace(epochs):
+        times = []
+        vms = []
+        for ep in epochs:
+            times.append(float(ep.time))
+            vms.append(float(ep.label))
+            times.append(float(ep.time)+float(ep.duration))
+            vms.append(ep.label)
+        return (np.array(times),np.array(vms))
+    import pylab as plb
     #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
     #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
-    f = open(filename)
-    head = BundleHeader(f)
-    head.load(f)
-    bi = head.oBundleItems[2]
-    print bi
-    pgf = PGFFile(f,bi)
-    #for i in pgf.tree['children']:
-    #    print len(i['children'])
-    count = 0
-    for g1i,group1 in enumerate(pgf.tree['children']):
-        print "---new child in root---"
-        for g2i,group2 in enumerate(group1['children']):
-            count += 1
-            print 'Count:%s'%(count)
-            #print 'chLinkedChannel:' + str(group2['contents'].chLinkedChannel)
-            #print (g1i,g2i)
-            print [str(group3['contents'].seVoltage) for group3 in group2['children']]
-        #print [str(sr['contents'].seDuration) for sr in i['children'][1]['children']]
-        #print [str(sr['contents'].seVoltage) for sr in i['children'][1]['children']]
-        #try:
-        #    print [str(sr['contents'].seVoltage) for sr in i['children'][2]['children']]
-        #except IndexError:
-        #    print 'no level'
-    #return head,pgf
+    ioreader = HekaIO(filename)
+    blo = ioreader.read_block(group = 9)
+    for seg in blo.segments:
+        ax1 = plb.subplot(2,1,1)
+        x,y = get_stimtrace(seg.epochs)
+        plb.plot(x,y)
+        plb.subplot(2,1,2,sharex = ax1)
+        for a_sig in seg.analogsignals:
+            x = np.array(a_sig.times)
+            y = np.array(a_sig)
+            plb.plot(x,y)
+    plb.show()
 
 class HekaIO(BaseIO):
     is_readable = True
@@ -131,11 +129,11 @@ class HekaIO(BaseIO):
 
 
         ### add protocols to signals
-        ep_start = pq.Quantity(0,'s')
+        #ep_start = pq.Quantity(0,'s')
         for sig in seg.analogsignals:
             pgf_index = sig.annotations['pgf_index']
+            ep_start = sig.t_start
             st_rec = self.pgf.tree['children'][pgf_index]['contents']
-
             for se_epoch in self.pgf.tree['children'][pgf_index]['children'][0]['children']:
                 se_rec = se_epoch['contents']
                 se_duration = pq.Quantity(float(se_rec.seDuration),'s')

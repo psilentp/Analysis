@@ -18,15 +18,6 @@ from chaco.tools.api import PanTool, ZoomTool, LegendTool,\
 from read_heka import *
 import numpy as np
 
-def get_stimtrace(epochs):
-    times = []
-    vms = []
-    for ep in epochs:
-        times.append(float(ep.time)*1.01)
-        vms.append(float(ep.label))
-        times.append(float(ep.time)+float(ep.duration))
-        vms.append(ep.label)
-    return (np.array(times),np.array(vms))
 
 #===============================================================================
 # # Create the Chaco plot.
@@ -173,6 +164,6 @@ class PlotFrame(DemoFrame):
         return Window(self, -1, component=_create_plot_component())
 
 if __name__ == "__main__":
-    demo_main(PlotFrame, size=size, title=title)
-    #gbi()
+    #demo_main(PlotFrame, size=size, title=title)
+    gbi()
     # EOF
