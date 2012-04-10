@@ -143,6 +143,6 @@ class PlotFrame(DemoFrame):
         return Window(self, -1, component=_create_plot_component())
 
 if __name__ == "__main__":
-    #demo_main(PlotFrame, size=size, title=title)
-    gbi()
+    demo_main(PlotFrame, size=size, title=title)
+    #gbi()
     # EOF
