@@ -146,7 +146,13 @@ class HekaIO(BaseIO):
         for a in annotations:
             d = {a:str(tree['contents'].__dict__[a])}
             sig.annotate(**d)
-        sig.annotate(pgf_index = series_count(self.pul,[0,group,series]))
+        pgf_index = series_count(self.pul,[0,group,series])
+        sig.annotate(pgf_index = pgf_index)
+        p_source = self.pgf.tree['children'][pgf_index][0]['children']
+
+        for stim_rec in [x['contents'] for x in p_source]:
+            stim_epoch = neo.Epoch(stim_rec.)
+            sig.segment.epochs.append(neo.Epoch)
         return sig
 
 def getleafs(tree_obj,f):
