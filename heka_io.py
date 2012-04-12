@@ -129,16 +129,22 @@ class HekaIO(BaseIO):
             pgf_index = sig.annotations['pgf_index']
             st_rec = self.pgf.tree['children'][pgf_index]['contents']
             chnls = [ch for ch in self.pgf.tree['children'][pgf_index]['children']]
-            for chnl in chnls:
-                print chnl
+            for ch_index, chnl in enumerate(chnls):
                 ep_start = sig.t_start
-                for se_epoch in chnl['children']:
+                for se_epoch_index, se_epoch in enumerate(chnl['children']):
                     se_rec = se_epoch['contents']
                     se_duration = pq.Quantity(float(se_rec.seDuration),'s')
-                    se_voltage = pq.Quantity(float(se_rec.seVoltage),'V')
-                    chnl_num = int(chnl['contents'].chDacChannel)
-                    print chnl_num
-                    epoch = neo.Epoch(ep_start,se_duration,'protocol_epoch',value=se_voltage,channel=chnl_num)
+                    print float(se_rec.seVoltage)
+                    print se_rec.seVoltageSource
+                    print chnl['contents'].chStimToDacID
+                    if not(int(se_rec.seVoltageSource)):
+                        se_voltage = pq.Quantity(float(se_rec.seVoltage),'V')
+                    else:
+                        se_voltage = pq.Quantity(float(chnl['contents'].chHolding))
+                    #chnl_num = int(chnl['contents'].chDacChannel)
+                    epoch = neo.Epoch(ep_start,se_duration,'protocol_epoch',value=se_voltage,channel_index=ch_index)
+                    fully_annototate(chnl,epoch)
+                    #epoch.annotate(**chnl['contents'].__dict__)
                     ep_start = ep_start + se_duration
                     seg.epochs.append(epoch)
         return seg
@@ -162,6 +168,13 @@ class HekaIO(BaseIO):
         pgf_index = series_count(self.pul,[0,group,series])
         sig.annotate(pgf_index = pgf_index)
         return sig
+
+def fully_annototate(heka_tree,neo_object):
+    annotations = heka_tree['contents'].__dict__.keys()
+    annotations.remove('readlist')
+    for a in annotations:
+        d = {a:str(heka_tree['contents'].__dict__[a])}
+        neo_object.annotate(**d)
 
 def getleafs(tree_obj,f):
     if isinstance(tree_obj['contents'], TraceRecord):

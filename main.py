@@ -22,7 +22,7 @@ import numpy as np
 #===============================================================================
 # # Create the Chaco plot.
 #===============================================================================
-def _create_plot_component():
+def _create_plot_component(group_num):
     container = OverlayPlotContainer(padding = 50, fill_padding = True,
         bgcolor = "lightgray", use_backbuffer=True)
 
@@ -35,7 +35,7 @@ def _create_plot_component():
     ioreader = HekaIO(filename3)
 
     #read a block
-    blo = ioreader.read_block(group = 1)
+    blo = ioreader.read_block(group = group_num)
 
     #protocol stuff
     f = open(filename1)
@@ -62,25 +62,7 @@ def _create_plot_component():
             plot.bgcolor = "white"
             plot.border_visible = True
 
-
-
-            #code for protocols
-
-            print "###########################"
-            print pgf.tree['children'][a_sig.annotations['pgf_index']]['children'][0]['children'][1]['contents'].seVoltage
-            for key in ['pgf_index','trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
-
-                print "%s:%s"%(key,a_sig.annotations[key])
-                #se_index = int(seg.annotations['seSeriesCount']) -1
-                #sw_index = int(a_sig.annotations['swSweepCount']) -1
-                #st_index = int(a_sig.annotations['swStimCount']) -1
-            #print pgf.tree['children'][se_index]['children'][st_index]['children'][1]['contents'].seVoltage
-            if not firstplot:
-                plot.value_mapper = value_mapper
-                value_mapper.range.add(plot.value)
-                plot.index_mapper = index_mapper
-                index_mapper.range.add(plot.index)
-            else:
+            if firstplot:
                 value_mapper = plot.value_mapper
                 index_mapper = plot.index_mapper
                 add_default_grids(plot)
@@ -99,28 +81,31 @@ def _create_plot_component():
                 dragzoom = DragZoom(plot, drag_button="right")
                 plot.tools.append(dragzoom)
                 # Add a legend in the upper right corner, and make it relocatable
-                legend = Legend(component=plot, padding=10, align="ur")
-                legend.tools.append(LegendTool(legend, drag_button="right"))
+                #legend = Legend(component=plot, padding=10, align="ur")
+                #legend.tools.append(LegendTool(legend, drag_button="right"))
                 #print a_sig.annotations
-                plot.overlays.append(legend)
+                #plot.overlays.append(legend)
                 firstplot = False
+            else:
+                plot.value_mapper = value_mapper
+                value_mapper.range.add(plot.value)
+                plot.index_mapper = index_mapper
+                index_mapper.range.add(plot.index)
             container.add(plot)
             #plots["sweep %s"%a_sig.annotations['trLabel'][:4]] = plot
             # Set the list of plots on the legend
-        ch = 0
-        ex,ey = get_stimtrace(seg.epochs)
-        print ex
-        print ey
-        plot = create_line_plot((ex,ey), width=0.5,color=tuple(COLOR_PALETTE[ch]))
-        plot.index.sort_order = "ascending"
-        plot.bgcolor = "white"
-        plot.border_visible = True
-        plot.value_mapper = value_mapper
-        value_mapper.range.add(plot.value)
-        plot.index_mapper = index_mapper
-        index_mapper.range.add(plot.index)
-        container.add(plot)
-        #plots["sweep %s"%a_sig.annotations['trLabel'][:4]] = plot
+
+        #ch = 0
+        #ex,ey = get_stimtrace(seg.epochs)
+        #plot = create_line_plot((ex,ey), width=0.5,color=tuple(COLOR_PALETTE[ch]))
+        #plot.index.sort_order = "ascending"
+        #plot.bgcolor = "white"
+        #plot.border_visible = True
+        #plot.value_mapper = value_mapper
+        #value_mapper.range.add(plot.value)
+        #plot.index_mapper = index_mapper
+        #index_mapper.range.add(plot.index)
+        #container.add(plot)
 
     #legend.plots = plots
     # Add the title at the top
@@ -152,7 +137,7 @@ class Demo(HasTraits):
     )
 
     def _plot_default(self):
-        return _create_plot_component()
+        return _create_plot_component(1)
 
 demo = Demo()
 #===============================================================================
@@ -161,9 +146,9 @@ demo = Demo()
 class PlotFrame(DemoFrame):
     def _create_window(self):
         # Return a window containing our plots
-        return Window(self, -1, component=_create_plot_component())
+        return Window(self, -1, component=_create_plot_component(6))
 
 if __name__ == "__main__":
-    #demo_main(PlotFrame, size=size, title=title)
-    gbi()
+    demo_main(PlotFrame, size=size, title=title)
+    #gbi()
     # EOF
