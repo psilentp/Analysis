@@ -11,7 +11,6 @@ def gbi():
     def get_stimtrace(epochs):
         times = []
         vms = []
-        print epochs
         for ep in epochs:
             if ep.annotations['channel'] == 3:
                 times.append(float(ep.time))
@@ -60,7 +59,6 @@ class HekaIO(BaseIO):
     mode = 'file'
 
     def __init__(self,filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'):
-        #print 'here'
         BaseIO.__init__(self)
         self.filename = filename
         f = open(filename)
@@ -68,13 +66,11 @@ class HekaIO(BaseIO):
         head = BundleHeader(f)
         #load the file
         head.load(f)
-        #print head
         #get the .pgf and .pul items in the file
         for bi in head.oBundleItems:
             if str(bi.oExtension)[0:4] == '.pgf':
                 self.pgf = PGFFile(f,bi)
             if str(bi.oExtension)[0:4] == '.pul':
-                #print 'here'
                 self.pul = PULFile(f,bi)
         f.close()
 
@@ -134,9 +130,6 @@ class HekaIO(BaseIO):
                 for se_epoch_index, se_epoch in enumerate(chnl['children']):
                     se_rec = se_epoch['contents']
                     se_duration = pq.Quantity(float(se_rec.seDuration),'s')
-                    print float(se_rec.seVoltage)
-                    print se_rec.seVoltageSource
-                    print chnl['contents'].chStimToDacID
                     if not(int(se_rec.seVoltageSource)):
                         se_voltage = pq.Quantity(float(se_rec.seVoltage),'V')
                     else:
@@ -179,7 +172,6 @@ def fully_annototate(heka_tree,neo_object):
 def getleafs(tree_obj,f):
     if isinstance(tree_obj['contents'], TraceRecord):
         tr = [gettrace(tree_obj['contents'],f)]
-        #print type(tr)
         return copy.copy(tr)
     else:
         leaflist = list()

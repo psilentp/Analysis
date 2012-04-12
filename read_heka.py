@@ -22,11 +22,6 @@ class TreeFile(object):
         #(self.num_levels):
         for l in range(self.num_levels):
             self.l_sizes.append(unpack('L',b_file.read(4))[0])
-        print 'lev sizes:' + str(self.l_sizes)
-        #if len(self.l_sizes) == 4:
-        #    b_file.read(4)
-        #print 'contents:' + str(repr(b_file.read(self.l_sizes[0])))
-        #print 'num_children:'+ str(unpack('L',b_file.read(4)))
 
 
     def load_level(self,level,b_file):

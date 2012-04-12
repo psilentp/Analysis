@@ -12,7 +12,6 @@ class HEKA_type(object):
     def read(self,read_file,debug = False):
         rstr = read_file.read(self.size)
         if debug:
-            print type(self)
             print repr(rstr)
         self.parse(rstr)
         
@@ -166,7 +165,6 @@ class HEKA_record(object):
     def load(self,b_file):
         #readindex = 0
         for key in self.readlist:
-            #print b_file.tell()
             self.__dict__[key].read(b_file)
             #self.__dict__[key] = self.data[key].data
             #readindex += self.data[key].size

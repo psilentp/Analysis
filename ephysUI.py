@@ -51,9 +51,8 @@ class BlockPlot(HasTraits):
 
 
     def __init__(self):
-        super(OverlappingPlot, self).__init__()
+        super(BlockPlot, self).__init__()
         sweeps, protocols,num_channels = get_segments(group_num=6)
-        print protocols
         datasourses = list()
         ### create the sweeps plot
         x = sweeps[0]['x']
@@ -102,7 +101,6 @@ class BlockPlot(HasTraits):
         #container = VPlotContainer(*plot_list)
         #container = GridPlotContainer(*plot_list,shape = (len(plot_list),1))
         #container = GridPlotContainer(prot_container,sweeps_container,padding=50,shape = (2,1))
-        #print container.components[0].height
         #self.plot = container
 
 if __name__ == "__main__":

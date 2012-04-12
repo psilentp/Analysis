@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b694d11a-0b6d-4e3d-9e96-2dcac79cc1e5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ephysUI.py" afterPath="$PROJECT_DIR$/ephysUI.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/heka_io.py" afterPath="$PROJECT_DIR$/heka_io.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/heka_structs.py" afterPath="$PROJECT_DIR$/heka_structs.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/read_heka.py" afterPath="$PROJECT_DIR$/read_heka.py" />
     </list>
     <ignored path="Analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,10 +30,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="0" selection-start="2051" selection-end="2051" vertical-scroll-proportion="1.1583011">
+            <state line="14" column="30" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -48,9 +51,20 @@
       <file leaf-file-name="heka_io.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heka_io.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
+            <state line="73" column="40" selection-start="2520" selection-end="2520" vertical-scroll-proportion="-42.115383">
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="read_heka.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/read_heka.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="0.7741935">
+              <folding>
+                <element signature="e#73#93#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,20 +79,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="epoch.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/epoch.py">
+      <file leaf-file-name="ephysUI.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ephysUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="475" selection-end="855" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="axonio.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/io/axonio.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="608" column="0" selection-start="24568" selection-end="24568" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="23" column="6" selection-start="1005" selection-end="1037" vertical-scroll-proportion="-6.923077">
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -86,7 +93,7 @@
       <file leaf-file-name="heka_structs.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heka_structs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="5" selection-start="3352" selection-end="3352" vertical-scroll-proportion="0.0">
+            <state line="15" column="11" selection-start="364" selection-end="365" vertical-scroll-proportion="-8.076923">
               <folding />
             </state>
           </provider>
@@ -118,14 +125,17 @@
       <list>
         <option value="$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt" />
         <option value="$PROJECT_DIR$/CENbrowser.py" />
-        <option value="$PROJECT_DIR$/heka_io.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/heka_io.py" />
+        <option value="$PROJECT_DIR$/heka_structs.py" />
+        <option value="$PROJECT_DIR$/ephysUI.py" />
+        <option value="$PROJECT_DIR$/read_heka.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="33" />
-    <option name="y" value="39" />
+    <option name="y" value="37" />
     <option name="width" value="1520" />
     <option name="height" value="923" />
   </component>
@@ -191,7 +201,7 @@
       <PyConsoleSettings />
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.ephysUI">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -211,6 +221,24 @@
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PyDebugRunner" />
       <ConfigurationWrapper RunnerId="PythonCover" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ephysUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="Analysis" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ephysUI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="MULTIPROCESS" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
@@ -249,8 +277,9 @@
       <option name="PUREUNITTEST" value="true" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
+      <item index="1" class="java.lang.String" itemvalue="Python.ephysUI" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -281,18 +310,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="33" y="39" width="1520" height="923" extended-state="0" />
+    <frame x="33" y="37" width="1520" height="923" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2941576" sideWeight="0.670398" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2941576" sideWeight="0.67164177" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.9949091" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3283582" sideWeight="0.9949091" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -355,16 +384,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ephys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-4.5832243" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/read_heka.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.01965924" />
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/traits/trait_notifiers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="372" column="0" selection-start="14536" selection-end="14536" vertical-scroll-proportion="1.389234" />
@@ -397,46 +416,75 @@
         <state line="174" column="0" selection-start="6172" selection-end="6172" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/analogsignal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="6" selection-start="9327" selection-end="9327" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/epoch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="475" selection-end="855" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/io/axonio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="608" column="0" selection-start="24568" selection-end="24568" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heka_structs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="5" selection-start="3352" selection-end="3352" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FileFormat_v9/FileFormat.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="404" column="0" selection-start="12404" selection-end="12404" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="30" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/analogsignal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="230" column="6" selection-start="9327" selection-end="9327" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/io/axonio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="214" column="16" selection-start="7005" selection-end="7010" vertical-scroll-proportion="-5.9615383">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/epoch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="12" selection-start="224" selection-end="224" vertical-scroll-proportion="0.21384929">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm20/python_stubs/1667462779/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="1088" selection-end="1088" vertical-scroll-proportion="-1.1344196">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ephysUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="6" selection-start="1005" selection-end="1037" vertical-scroll-proportion="-6.923077">
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heka_structs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="11" selection-start="364" selection-end="365" vertical-scroll-proportion="-8.076923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/heka_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
+        <state line="73" column="40" selection-start="2520" selection-end="2520" vertical-scroll-proportion="-42.115383">
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/read_heka.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="2051" selection-end="2051" vertical-scroll-proportion="1.1583011">
-          <folding />
+        <state line="24" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="0.7741935">
+          <folding>
+            <element signature="e#73#93#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
