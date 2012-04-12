@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b694d11a-0b6d-4e3d-9e96-2dcac79cc1e5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <ignored path="Analysis.iws" />
@@ -28,10 +27,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
+            <state line="64" column="0" selection-start="2051" selection-end="2051" vertical-scroll-proportion="1.1583011">
               <folding />
             </state>
           </provider>
@@ -46,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="heka_io.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="heka_io.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heka_io.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="210" column="0" selection-start="8315" selection-end="8315" vertical-scroll-proportion="6.1523438">
+            <state line="8" column="0" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -118,15 +117,15 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/CENbrowser.py" />
         <option value="$PROJECT_DIR$/heka_io.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="104" />
-    <option name="y" value="367" />
+    <option name="x" value="33" />
+    <option name="y" value="39" />
     <option name="width" value="1520" />
     <option name="height" value="923" />
   </component>
@@ -156,7 +155,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -177,6 +175,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -282,18 +281,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="104" y="367" width="1520" height="923" extended-state="0" />
+    <frame x="33" y="39" width="1520" height="923" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2894022" sideWeight="0.670398" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2941576" sideWeight="0.670398" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329602" sideWeight="0.9949091" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.9949091" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -381,6 +380,23 @@
         <state line="111" column="0" selection-start="4120" selection-end="4120" vertical-scroll-proportion="0.5531915" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="13" selection-start="4501" selection-end="4507" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="41" selection-start="4108" selection-end="4108" vertical-scroll-proportion="0.023847377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/chaco/lineplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="0" selection-start="6172" selection-end="6172" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/neo-0.2.0-py2.7.egg/neo/core/analogsignal.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="230" column="6" selection-start="9327" selection-end="9327" vertical-scroll-proportion="0.0" />
@@ -408,36 +424,19 @@
         <state line="404" column="0" selection-start="12404" selection-end="12404" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt">
+    <entry file="file://$PROJECT_DIR$/heka_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="13" selection-start="4501" selection-end="4507" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FileFormat_v9/StimFile_v9.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="41" selection-start="4108" selection-end="4108" vertical-scroll-proportion="0.023847377">
-          <folding />
+        <state line="8" column="0" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
+        <state line="64" column="0" selection-start="2051" selection-end="2051" vertical-scroll-proportion="1.1583011">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/7.2/lib/python2.7/site-packages/chaco/lineplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="0" selection-start="6172" selection-end="6172" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heka_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="210" column="0" selection-start="8315" selection-end="8315" vertical-scroll-proportion="6.1523438">
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
