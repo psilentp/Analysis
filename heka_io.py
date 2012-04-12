@@ -134,10 +134,8 @@ class HekaIO(BaseIO):
                         se_voltage = pq.Quantity(float(se_rec.seVoltage),'V')
                     else:
                         se_voltage = pq.Quantity(float(chnl['contents'].chHolding))
-                    #chnl_num = int(chnl['contents'].chDacChannel)
                     epoch = neo.Epoch(ep_start,se_duration,'protocol_epoch',value=se_voltage,channel_index=ch_index)
                     fully_annototate(chnl,epoch)
-                    #epoch.annotate(**chnl['contents'].__dict__)
                     ep_start = ep_start + se_duration
                     seg.epochs.append(epoch)
         return seg

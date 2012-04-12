@@ -7,7 +7,11 @@ from numpy import cos, linspace, sin
 from heka_io import *
 import numpy as np
 
-def get_segments(group_num = 1):
+
+###In order to meld the axonio with the hekaio I will need to make get_block return
+###data structured in the same way for both file-formats. Maybe it would be better to create an
+###Irregularly Sampled signal to represent the protocol.
+def get_block(block_num = 1):
     def get_stimtrace(epochs,channel):
         times = []
         vms = []
@@ -22,7 +26,7 @@ def get_segments(group_num = 1):
     #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
     ioreader = HekaIO(filename)
-    blo = ioreader.read_block(group = group_num)
+    blo = ioreader.read_block(group = block_num)
 
     protocol_list = list()
     sweep_list = list()
@@ -52,7 +56,7 @@ class BlockPlot(HasTraits):
 
     def __init__(self):
         super(BlockPlot, self).__init__()
-        sweeps, protocols,num_channels = get_segments(group_num=6)
+        sweeps, protocols,num_channels = get_block(block_num=6)
         datasourses = list()
         ### create the sweeps plot
         x = sweeps[0]['x']
@@ -98,10 +102,7 @@ class BlockPlot(HasTraits):
             plot_list.append(prots)
         self.signals_plots = VPlotContainer(sweeps)
         self.protocols_plots = VPlotContainer(*plot_list)
-        #container = VPlotContainer(*plot_list)
-        #container = GridPlotContainer(*plot_list,shape = (len(plot_list),1))
-        #container = GridPlotContainer(prot_container,sweeps_container,padding=50,shape = (2,1))
-        #self.plot = container
+
 
 if __name__ == "__main__":
     BlockPlot().configure_traits()

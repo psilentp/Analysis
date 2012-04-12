@@ -4,8 +4,6 @@
     <list default="true" id="b694d11a-0b6d-4e3d-9e96-2dcac79cc1e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ephysUI.py" afterPath="$PROJECT_DIR$/ephysUI.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/heka_io.py" afterPath="$PROJECT_DIR$/heka_io.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/heka_structs.py" afterPath="$PROJECT_DIR$/heka_structs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/read_heka.py" afterPath="$PROJECT_DIR$/read_heka.py" />
     </list>
     <ignored path="Analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,20 +49,9 @@
       <file leaf-file-name="heka_io.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heka_io.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="40" selection-start="2520" selection-end="2520" vertical-scroll-proportion="-42.115383">
+            <state line="134" column="25" selection-start="5373" selection-end="5373" vertical-scroll-proportion="-56.807693">
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="read_heka.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/read_heka.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="0.7741935">
-              <folding>
-                <element signature="e#73#93#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,10 +66,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ephysUI.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ephysUI.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ephysUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="6" selection-start="1005" selection-end="1037" vertical-scroll-proportion="-6.923077">
+            <state line="25" column="34" selection-start="1137" selection-end="1137" vertical-scroll-proportion="0.7392197">
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -126,10 +113,10 @@
         <option value="$PROJECT_DIR$/FileFormat_v9/PulsedFile_v9.txt" />
         <option value="$PROJECT_DIR$/CENbrowser.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/heka_io.py" />
         <option value="$PROJECT_DIR$/heka_structs.py" />
-        <option value="$PROJECT_DIR$/ephysUI.py" />
         <option value="$PROJECT_DIR$/read_heka.py" />
+        <option value="$PROJECT_DIR$/heka_io.py" />
+        <option value="$PROJECT_DIR$/ephysUI.py" />
       </list>
     </option>
   </component>
@@ -454,15 +441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ephysUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="6" selection-start="1005" selection-end="1037" vertical-scroll-proportion="-6.923077">
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/heka_structs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="11" selection-start="364" selection-end="365" vertical-scroll-proportion="-8.076923">
@@ -470,20 +448,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/read_heka.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="-0.19354838">
+          <folding>
+            <element signature="e#73#93#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/heka_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="40" selection-start="2520" selection-end="2520" vertical-scroll-proportion="-42.115383">
+        <state line="134" column="25" selection-start="5373" selection-end="5373" vertical-scroll-proportion="-56.807693">
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/read_heka.py">
+    <entry file="file://$PROJECT_DIR$/ephysUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="0.7741935">
+        <state line="25" column="34" selection-start="1137" selection-end="1137" vertical-scroll-proportion="0.7392197">
           <folding>
-            <element signature="e#73#93#0" expanded="true" />
+            <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
