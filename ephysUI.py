@@ -7,7 +7,7 @@ from numpy import cos, linspace, sin
 from heka_io import *
 import numpy as np
 
-
+#a new change
 ###In order to meld the axonio with the hekaio I will need to make get_block return
 ###data structured in the same way for both file-formats. Maybe it would be better to create an
 ###Irregularly Sampled signal to represent the protocol.
