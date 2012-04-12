@@ -35,7 +35,11 @@ def _create_plot_component(group_num):
     ioreader = HekaIO(filename3)
 
     #read a block
+<<<<<<< HEAD
     blo = ioreader.read_block(group = group_num)
+=======
+    blo = ioreader.read_block(group = 2)
+>>>>>>> 42093f387ac03db78460ae4842682bd4fb26de06
 
     #protocol stuff
     f = open(filename1)
@@ -62,7 +66,32 @@ def _create_plot_component(group_num):
             plot.bgcolor = "white"
             plot.border_visible = True
 
+<<<<<<< HEAD
             if firstplot:
+=======
+            #code for protocols
+
+            print "###########################"
+            st_rec = pgf.tree['children'][a_sig.annotations['pgf_index']]['contents']
+            se_rec = pgf.tree['children'][a_sig.annotations['pgf_index']]['children'][0]['children'][1]['contents']
+            for key in ['stMark','stDataStartSegment','stDataStartTime']:
+                print key+ ' ' +str(st_rec.__dict__[key])
+            for key in ['seVoltageIncMode','seDuration','seDurationIncMode','seVoltage',]:
+                print key+' '+str(se_rec.__dict__[key])
+            for key in ['pgf_index','trTraceCount','trAdcChannel','trSourceChannel','swStimCount']:
+
+                print "%s:%s"%(key,a_sig.annotations[key])
+                #se_index = int(seg.annotations['seSeriesCount']) -1
+                #sw_index = int(a_sig.annotations['swSweepCount']) -1
+                #st_index = int(a_sig.annotations['swStimCount']) -1
+            #print pgf.tree['children'][se_index]['children'][st_index]['children'][1]['contents'].seVoltage
+            if not firstplot:
+                plot.value_mapper = value_mapper
+                value_mapper.range.add(plot.value)
+                plot.index_mapper = index_mapper
+                index_mapper.range.add(plot.index)
+            else:
+>>>>>>> 42093f387ac03db78460ae4842682bd4fb26de06
                 value_mapper = plot.value_mapper
                 index_mapper = plot.index_mapper
                 add_default_grids(plot)
