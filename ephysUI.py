@@ -23,8 +23,8 @@ def get_block(block_num = 1):
                 vms.append(ep.annotations['value'])
         return {'x':np.array(times),'y':np.array(vms)}
     #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
-    #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
-    filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    #filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
     ioreader = HekaIO(filename)
     blo = ioreader.read_block(group = block_num)
 
@@ -56,7 +56,7 @@ class BlockPlot(HasTraits):
 
     def __init__(self):
         super(BlockPlot, self).__init__()
-        sweeps, protocols,num_channels = get_block(block_num=6)
+        sweeps, protocols,num_channels = get_block(block_num=3)
         datasourses = list()
         ### create the sweeps plot
         x = sweeps[0]['x']
