@@ -39,11 +39,15 @@ fprefix = '/Volumes/Data/CENs/CEN'
 errors = [['182','THL_2012-03-19_17-40-54_000.dat','THL_2012-03-19_17-49-46_000.dat'],
     ['179','THL_2012-03-14_20-02-26_000.dat','THL_2012-03-14_20-06-51_000.dat'],
     ['177','THL_2012-03-14_16-35-53_000.dat','THL_2012-03-14_16-39-22_000.dat'],
-    ['176','THL_2012-03-13_19-37-19_000.dat','THL_2012-03-13_19-40-47_000.dat']]
+    ['176','THL_2012-03-13_19-37-19_000.dat','THL_2012-03-13_19-40-47_000.dat'],
+    ['175','THL_2012-03-13_15-34-06_000.dat','THL_2012-03-13_15-38-02_000.dat']]
 
-jefferson = [['183','THL_2012-03-19_19-39-39_000.dat','THL_2012-03-19_19-43-43_000.dat'],
+jefferson = [['182','THL_2012-03-19_17-40-54_000.dat','THL_2012-03-19_17-49-46_000.dat'],
+             ['179','THL_2012-03-14_20-02-26_000.dat','THL_2012-03-14_20-06-51_000.dat'],
+             ['176','THL_2012-03-13_19-37-19_000.dat','THL_2012-03-13_19-40-47_000.dat'],
+             ['183','THL_2012-03-19_19-39-39_000.dat','THL_2012-03-19_19-43-43_000.dat'],
              ['178','THL_2012-03-14_17-31-43_000.dat','THL_2012-03-14_17-36-20_000.dat'],
-             ['175','THL_2012-03-13_15-34-06_000.dat','THL_2012-03-13_15-38-02_000.dat']]
+             ]
 
 washington = [['184','THL_2012-03-21_18-40-42_000.dat','THL_2012-03-21_18-44-42_000.dat'],
               ['181','THL_2012-03-15_17-49-05_000.dat','THL_2012-03-15_17-54-17_000.dat'],
@@ -58,7 +62,7 @@ washington = [['184','THL_2012-03-21_18-40-42_000.dat','THL_2012-03-21_18-44-42_
 washington = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in washington]
 jefferson = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in jefferson]
 errors = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in errors]
-"""
+
 for i,block_num in enumerate([1,2,5,1,2,4]):
     filename = washington[i][1]#'./test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     ioreader = HekaIO(filename)
@@ -75,10 +79,33 @@ for i,block_num in enumerate([1,2,5,1,2,4]):
     y = [io['out'] for io in input_output]
     x = [0.01, 0.03, 0.1, 0.3, 1, 3]
     x = x[:len(y)]
-    print len(y)
+    #print len(y)
     #print y
-    plb.plot(x,y,'-o')
+    plb.plot(x,y,'-',color = 'g',lw=3,alpha=0.5)
+    #plb.gca().set_xscale('log')
+    #print input_output
+
+for i,block_num in enumerate([1,2,1,3,1]):
+    filename = jefferson[i][1]#'./test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    ioreader = HekaIO(filename)
+    blo = ioreader.read_block(group = block_num)
+    #stimulus power is stored in the second epoch in which annotations['chDacChannel'] == '2'
+    input_output = list()
+    for seg in blo.segments[:6]:
+        sig = seg.analogsignals[0]
+        eps = [x for x in seg.epochs if x.annotations['chDacChannel'] == '2']
+        chunk = ts(sig,eps[1].time,eps[1].time+eps[1].duration)
+        input_output.append({'in':eps[1].annotations['value'],'out':np.mean(chunk)})
+
+    x = [io['in'] for io in input_output]
+    y = [io['out'] for io in input_output]
+    x = [0.01, 0.03, 0.1, 0.3, 1, 3]
+    x = x[:len(y)]
+    #print len(y)
+    #print y
+    plb.plot(x,y,'-',color = 'b',lw=3,alpha=0.5)
     plb.gca().set_xscale('log')
-    print input_output
+
+    #print input_output
+plb.legend()
 plb.show()
-"""

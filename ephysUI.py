@@ -81,13 +81,16 @@ class BlockPlot(HasTraits):
         #plot_list = [sweeps]
         plot_list = list()
         ### create the protocol plot... list of plots for multiple stimulus channels?
-        print protocols
+        #print protocols
         for chnum in range(num_channels):
             chkey = protocols[0].keys()[chnum]
             x = protocols[0][chkey]['x']
             prot_data = {'x':x}
             for index, item in enumerate(protocols):
-                prot_data.update({str(index):item[chkey]['y']})
+                try:
+                    prot_data.update({str(index):item[chkey]['y']})
+                except KeyError,er:
+                    print er
             prot_plot_data = ArrayPlotData(**prot_data)
             datasourses.append(prot_plot_data)
             prots = Plot(datasourses[chnum+1],padding = 30 )
