@@ -81,7 +81,7 @@ class BlockPlot(HasTraits):
         #plot_list = [sweeps]
         plot_list = list()
         ### create the protocol plot... list of plots for multiple stimulus channels?
-
+        print protocols
         for chnum in range(num_channels):
             chkey = protocols[0].keys()[chnum]
             x = protocols[0][chkey]['x']

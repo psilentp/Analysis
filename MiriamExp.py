@@ -33,21 +33,32 @@ def ts(sig,*key,**kwargs):
     return ob
 
 
+
 fprefix = '/Volumes/Data/CENs/CEN'
 
-jefferson = [[''
-            ]
+errors = [['182','THL_2012-03-19_17-40-54_000.dat','THL_2012-03-19_17-49-46_000.dat'],
+    ['179','THL_2012-03-14_20-02-26_000.dat','THL_2012-03-14_20-06-51_000.dat'],
+    ['177','THL_2012-03-14_16-35-53_000.dat','THL_2012-03-14_16-39-22_000.dat'],
+    ['176','THL_2012-03-13_19-37-19_000.dat','THL_2012-03-13_19-40-47_000.dat']]
+
+jefferson = [['183','THL_2012-03-19_19-39-39_000.dat','THL_2012-03-19_19-43-43_000.dat'],
+             ['178','THL_2012-03-14_17-31-43_000.dat','THL_2012-03-14_17-36-20_000.dat'],
+             ['175','THL_2012-03-13_15-34-06_000.dat','THL_2012-03-13_15-38-02_000.dat']]
+
 washington = [['184','THL_2012-03-21_18-40-42_000.dat','THL_2012-03-21_18-44-42_000.dat'],
               ['181','THL_2012-03-15_17-49-05_000.dat','THL_2012-03-15_17-54-17_000.dat'],
               ['180','THL_2012-03-15_15-05-04_000.dat','THL_2012-03-15_15-08-40_000.dat'],
               ['174','THL_2012-03-12_18-34-23_000.dat','THL_2012-03-12_18-38-41_000.dat'],
               ['173','THL_2012-03-12_17-28-39_000.dat','THL_2012-03-12_17-32-19_000.dat'],
               ['172','THL_2012-03-09_15-26-56_000.dat','THL_2012-03-09_15-31-14_000.dat']]
-
+[3,
+ 1,
+ 1]
 
 washington = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in washington]
-
-jefferson = []
+jefferson = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in jefferson]
+errors = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in errors]
+"""
 for i,block_num in enumerate([1,2,5,1,2,4]):
     filename = washington[i][1]#'./test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     ioreader = HekaIO(filename)
@@ -70,3 +81,4 @@ for i,block_num in enumerate([1,2,5,1,2,4]):
     plb.gca().set_xscale('log')
     print input_output
 plb.show()
+"""
