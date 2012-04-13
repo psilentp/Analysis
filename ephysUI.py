@@ -11,7 +11,7 @@ import numpy as np
 ###In order to meld the axonio with the hekaio I will need to make get_block return
 ###data structured in the same way for both file-formats. Maybe it would be better to create an
 ###Irregularly Sampled signal to represent the protocol.
-def get_block(block_num = 1):
+def get_block(filename =  './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat',block_num = 1):
     def get_stimtrace(epochs,channel):
         times = []
         vms = []
@@ -23,7 +23,7 @@ def get_block(block_num = 1):
                 vms.append(ep.annotations['value'])
         return {'x':np.array(times),'y':np.array(vms)}
     #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
-    filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     #filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
     ioreader = HekaIO(filename)
     blo = ioreader.read_block(group = block_num)
@@ -54,9 +54,9 @@ class BlockPlot(HasTraits):
             width=700, height=700, resizable=True, title="Chaco Plot")
 
 
-    def __init__(self):
+    def __init__(self,filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat',block_num = 3):
         super(BlockPlot, self).__init__()
-        sweeps, protocols,num_channels = get_block(block_num=3)
+        sweeps, protocols,num_channels = get_block(filename = filename,block_num=block_num)
         datasourses = list()
         ### create the sweeps plot
         x = sweeps[0]['x']

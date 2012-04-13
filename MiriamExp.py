@@ -33,20 +33,40 @@ def ts(sig,*key,**kwargs):
     return ob
 
 
-filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
-ioreader = HekaIO(filename)
-block_num = 3
-blo = ioreader.read_block(group = block_num)
-#stimulus power is stored in the second epoch in which annotations['chDacChannel'] == '2'
-input_output = list()
-for seg in blo.segments:
-    sig = seg.analogsignals[0]
-    eps = [x for x in seg.epochs if x.annotations['chDacChannel'] == '2']
-    chunk = ts(sig,eps[1].time,eps[1].time+eps[1].duration)
-    input_output.append({'in':eps[1].annotations['value'],'out':np.mean(chunk)})
+fprefix = '/Volumes/Data/CENs/CEN'
 
-x = [io['in'] for io in input_output]
-y = [io['out'] for io in input_output]
-plb.plot(x,y,'-o')
-print input_output
+jefferson = [[''
+            ]
+washington = [['184','THL_2012-03-21_18-40-42_000.dat','THL_2012-03-21_18-44-42_000.dat'],
+              ['181','THL_2012-03-15_17-49-05_000.dat','THL_2012-03-15_17-54-17_000.dat'],
+              ['180','THL_2012-03-15_15-05-04_000.dat','THL_2012-03-15_15-08-40_000.dat'],
+              ['174','THL_2012-03-12_18-34-23_000.dat','THL_2012-03-12_18-38-41_000.dat'],
+              ['173','THL_2012-03-12_17-28-39_000.dat','THL_2012-03-12_17-32-19_000.dat'],
+              ['172','THL_2012-03-09_15-26-56_000.dat','THL_2012-03-09_15-31-14_000.dat']]
+
+
+washington = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in washington]
+
+jefferson = []
+for i,block_num in enumerate([1,2,5,1,2,4]):
+    filename = washington[i][1]#'./test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    ioreader = HekaIO(filename)
+    blo = ioreader.read_block(group = block_num)
+    #stimulus power is stored in the second epoch in which annotations['chDacChannel'] == '2'
+    input_output = list()
+    for seg in blo.segments:
+        sig = seg.analogsignals[0]
+        eps = [x for x in seg.epochs if x.annotations['chDacChannel'] == '2']
+        chunk = ts(sig,eps[1].time,eps[1].time+eps[1].duration)
+        input_output.append({'in':eps[1].annotations['value'],'out':np.mean(chunk)})
+
+    x = [io['in'] for io in input_output]
+    y = [io['out'] for io in input_output]
+    x = [0.01, 0.03, 0.1, 0.3, 1, 3]
+    x = x[:len(y)]
+    print len(y)
+    #print y
+    plb.plot(x,y,'-o')
+    plb.gca().set_xscale('log')
+    print input_output
 plb.show()
