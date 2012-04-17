@@ -107,5 +107,52 @@ for i,block_num in enumerate([1,2,1,3,1]):
     plb.gca().set_xscale('log')
 
     #print input_output
-plb.legend()
+#plb.legend()
+
+
+def get_block(filename =  filename,block_num = 1):
+    def get_stimtrace(epochs,channel):
+        times = []
+        vms = []
+        for ep in epochs:
+            if ep.annotations['chDacChannel'] == channel:
+                times.append(float(ep.time))
+                vms.append(float(ep.annotations['value']))
+                times.append(float(ep.time)+float(ep.duration))
+                vms.append(ep.annotations['value'])
+        return {'x':np.array(times),'y':np.array(vms)}
+        #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
+    #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
+    #filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    ioreader = HekaIO(filename)
+    blo = ioreader.read_block(group = block_num)
+
+    protocol_list = list()
+    sweep_list = list()
+    max_channels = 0
+    for seg in blo.segments:
+        chnl_map = dict()
+        for ep_index, ep in enumerate(seg.epochs):
+            if ep.label == 'protocol_epoch':
+                chnl_map.update({ep.annotations['chDacChannel']:
+                                     get_stimtrace(seg.epochs,ep.annotations['chDacChannel'])})
+            if len(chnl_map.keys()) > max_channels:
+                max_channels = len(chnl_map.keys())
+        protocol_list.append(chnl_map)
+        for a_sig in seg.analogsignals:
+            sweep_list.append({'x':np.array(a_sig.times),'y':np.array(a_sig)})
+    return(sweep_list,protocol_list,max_channels)
+
+
+# plot example trace
+plb.figure()
+filename = '/Volumes/Data/CENs/CEN176/THL_2012-03-13_19-40-47_000.dat'
+data = get_block(filename=filename,block_num=1)
+ax = plb.subplot(2,1,1)
+for prot in data[1][:6]:
+    print prot.keys()
+    plb.plot(prot['2']['x'],prot['2']['y'],color ='k')
+plb.subplot(2,1,2,sharex = ax)
+for sig in data[0]:
+    plb.plot(sig['x'],sig['y'], color = 'k')
 plb.show()

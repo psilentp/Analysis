@@ -1,3 +1,4 @@
+from chaco.plot_graphics_context import PlotGraphicsContext
 from traits.api import HasTraits, Instance
 from traitsui.api import View, Item
 from chaco.tools.api import PanTool, ZoomTool
@@ -8,10 +9,13 @@ from heka_io import *
 import numpy as np
 
 
+from  chaco.pdf_graphics_context import PdfPlotGraphicsContext
+
 ###In order to meld the axonio with the hekaio I will need to make get_block return
 ###data structured in the same way for both file-formats. Maybe it would be better to create an
 ###Irregularly Sampled signal to represent the protocol.
-def get_block(filename =  './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat',block_num = 1):
+filename = '/Volumes/Data/CENs/CEN176/THL_2012-03-13_19-40-47_000.dat'
+def get_block(filename =  filename,block_num = 1):
     def get_stimtrace(epochs,channel):
         times = []
         vms = []
@@ -54,7 +58,7 @@ class BlockPlot(HasTraits):
             width=700, height=700, resizable=True, title="Chaco Plot")
 
 
-    def __init__(self,filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat',block_num = 3):
+    def __init__(self,filename =filename,block_num = 1):
         super(BlockPlot, self).__init__()
         sweeps, protocols,num_channels = get_block(filename = filename,block_num=block_num)
         datasourses = list()
@@ -106,6 +110,15 @@ class BlockPlot(HasTraits):
         self.signals_plots = VPlotContainer(sweeps)
         self.protocols_plots = VPlotContainer(*plot_list)
 
+    def save_plot(self, filename, width, height):
+        self.signals_plots.outer_bounds = [width, height]
+        self.signals_plots.do_layout(force=True)
+        gc = PdfPlotGraphicsContext((width, height))
+        gc.render_component(self.signals_plots)
+        gc.save(filename)
+
 
 if __name__ == "__main__":
-    BlockPlot().configure_traits()
+    myplot = BlockPlot()
+    myplot.configure_traits()
+    myplot.save_plot('new.pdf',500,500)
