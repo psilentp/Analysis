@@ -1,0 +1,5 @@
+Evidence for spikelets in C. elegans neurons.
+
+A) Whole-cell current-clamp recording of voltage in a neuron identified using sra-11::GFP expression. A 3pA tonic current stimulus (top) evoked repetitive impulse depolarizations (spikelets) superimposed on a sustained depolarization (bottom). 
+
+B) Multiple trials of short (10ms) current stimuli injected into the cell shown in (A) were used to repeatedly trigger regenerative spikelets that outlast stimulus termination (dotted line). Note that spikelets follow a characteristic waveform, however this waveform exhibits considerable variability in amplitude and time course from trial-to-trial. Sra-11 is expressed in the neurons AIY, AVB and AIA.
