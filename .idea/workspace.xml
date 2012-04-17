@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b694d11a-0b6d-4e3d-9e96-2dcac79cc1e5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiriamExp.py" afterPath="$PROJECT_DIR$/MiriamExp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ephysUI.py" afterPath="$PROJECT_DIR$/ephysUI.py" />
-    </list>
+    <list default="true" id="b694d11a-0b6d-4e3d-9e96-2dcac79cc1e5" name="Default" comment="" />
     <ignored path="Analysis.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,7 +48,7 @@
       <file leaf-file-name="MiriamExp.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MiriamExp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="28" selection-start="5701" selection-end="5701" vertical-scroll-proportion="0.37937742">
+            <state line="130" column="23" selection-start="5651" selection-end="5651" vertical-scroll-proportion="0.32101166">
               <folding />
             </state>
           </provider>
@@ -448,7 +444,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MiriamExp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="28" selection-start="5701" selection-end="5701" vertical-scroll-proportion="0.37937742">
+        <state line="130" column="23" selection-start="5651" selection-end="5651" vertical-scroll-proportion="0.32101166">
           <folding />
         </state>
       </provider>
