@@ -25,6 +25,7 @@ root = globals()
 [root.pop(key) for key in start_globs.difference(new_globs)]
 viewer = ViewablePGF(root)
 viewer.configure_traits(view=default_view)
+change
 """
 
 
