@@ -347,7 +347,7 @@ class Trace(Event):
     
     def get_low_filter(self,Hz):
     #return a low-pass-filterd version of the time series
-        import FiltFilt
+        from scipy.signal import filtfilt
         filter_order = 3
         sampfreq = 1/self.dt.rescale('sec')
         filtfreq = quan.Quantity(Hz,'Hz')
@@ -355,7 +355,7 @@ class Trace(Event):
         from scipy.signal import butter
         [b,a]=butter(filter_order,passband_peram)
         ob = cp.copy(self)
-        ob.y = quan.Quantity(FiltFilt.filtfilt(b,a,self.y),self.yunits)
+        ob.y = quan.Quantity(filtfilt(b,a,self.y),self.yunits)
         return ob
     
     def get_normalized(self):

@@ -21,9 +21,10 @@ def gbi():
     import pylab as plb
     #filename = './test_data/CEN184/THL_2012-03-21_18-40-42_000.dat'
     #filename = './test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
-    filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    #filename = './test_data/CEN111/THL_2011-07-09_15-02-54_000.dat'
+    filename = './test_data/CEN189/THL_2012-05-05_03-47-10_000.dat'
     ioreader = HekaIO(filename)
-    blo = ioreader.read_block(group = 7)
+    blo = ioreader.read_block(group = 2)
     for seg in blo.segments:
         ax1 = plb.subplot(2,1,1)
         x,y = get_stimtrace(seg.epochs)
