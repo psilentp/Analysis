@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="c8ed9266-7f08-454a-b4c7-d2c3a52830b8" name="Default" comment="" />
+=======
+    <list default="true" id="22dd81a3-0a00-49b8-a9e7-bac0cbf76137" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/heka_tree.py" afterPath="$PROJECT_DIR$/heka_tree.py" />
+    </list>
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
     <ignored path="Analysis.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,11 +28,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file leaf-file-name="heka_tree.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/heka_tree.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="12" column="27" selection-start="312" selection-end="312" vertical-scroll-proportion="-1.3780919">
               <folding />
+=======
+      <file leaf-file-name="ephys.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ephys.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="8" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="heka_tree.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/heka_tree.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="78" column="25" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.41095892">
+              <folding>
+                <element signature="e#25#51#0" expanded="true" />
+              </folding>
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
             </state>
           </provider>
         </entry>
@@ -34,6 +59,7 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+<<<<<<< HEAD
     <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
     <option name="UPDATE_CHANGES_POLICY" value="STASH" />
     <option name="LINE_SEPARATORS_CONVERSION" value="ASK" />
@@ -43,6 +69,22 @@
     <option name="y" value="22" />
     <option name="width" value="1495" />
     <option name="height" value="1004" />
+=======
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/heka_tree.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="26" />
+    <option name="y" value="22" />
+    <option name="width" value="1520" />
+    <option name="height" value="923" />
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -70,7 +112,10 @@
       <sortByType />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -91,6 +136,19 @@
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -98,6 +156,17 @@
     <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <PyConsoleSettings />
+    </option>
+    <option name="myDjangoConsoleState">
+      <PyConsoleSettings />
+    </option>
+  </component>
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
   <component name="RunManager" selected="Python.heka_tree">
     <configuration default="false" name="heka_tree" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,12 +228,19 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <created>1334905686031</created>
       <updated>1334905686031</updated>
+=======
+      <changelist id="22dd81a3-0a00-49b8-a9e7-bac0cbf76137" name="Default" comment="" />
+      <created>1334893494527</created>
+      <updated>1334893494527</updated>
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="65" y="22" width="1495" height="1004" extended-state="0" />
     <editor active="true" />
     <layout>
@@ -185,6 +261,28 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+=======
+    <frame x="26" y="22" width="1520" height="923" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2540761" sideWeight="0.6708229" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32917705" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -220,9 +318,18 @@
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
+<<<<<<< HEAD
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="LAST_COMMIT_MESSAGE" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
+=======
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
@@ -239,10 +346,24 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/heka_tree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="27" selection-start="312" selection-end="312" vertical-scroll-proportion="-1.3780919">
           <folding />
+=======
+    <entry file="file://$PROJECT_DIR$/ephys.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="8" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heka_tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="25" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.41095892">
+          <folding>
+            <element signature="e#25#51#0" expanded="true" />
+          </folding>
+>>>>>>> a1977f04cfd985b8fabe9e6b0eeacad3a1dbbd5f
         </state>
       </provider>
     </entry>

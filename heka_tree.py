@@ -3,7 +3,7 @@ __author__ = 'psilentp'
 from heka_structs import *
 from heka_io import *
 from read_heka import *
-from traits.api import HasTraits,Instance,Int,Str,List
+from traits.api import HasTraits,Instance,Int,Str,List,File
 
 from traitsui.api import View, Item,ValueEditor,TreeEditor,TreeNode,Group,Handler
 no_view = View()
@@ -28,8 +28,10 @@ viewer.configure_traits(view=default_view)
 change
 """
 
-
-
+import os
+cell_directory = './test_data/'
+dir_contents = os.listdir(cell_directory)
+cen_strs = [x for x in dir_contents if x[:3] == 'CEN']
 
 class Trial(HasTraits):
     name = Str('<unknown>')
@@ -37,6 +39,7 @@ class Trial(HasTraits):
 class CeNeuron(HasTraits):
     number = Int()
     cellid = Str('<unknown>')
+    files = List(File)
     trials = List(Trial)
     snum = Str()
     def __init__(self,number,cellid,trials):
@@ -44,9 +47,10 @@ class CeNeuron(HasTraits):
         self.cellid = cellid
         self.trials = trials
         self.snum = str(number)
+        self.files = [x for x in os.listdir(cell_directory + 'CEN' + str(number) + '/')]
 
 class CellBrowser(HasTraits):
-    name = Str('<unknown>')
+    name = Str('C elegans neurons')
     cens = List(CeNeuron)
 
 class Root(HasTraits):
@@ -58,6 +62,8 @@ trial3 = Trial(name = 'trial3')
 trial4 = Trial(name = 'trial4')
 trial5 = Trial(name = 'trial5')
 
+cells = [CeNeuron(number = int(x[3:]), cellid = 'AVB', trials = []) for x in cen_strs]
+"""
 cell1 = CeNeuron(number = 1,
                 cellid ='AVA',
                 trials = [trial1,trial2]
@@ -67,8 +73,8 @@ cell2 = CeNeuron(number = 2,
                 cellid = 'AVB',
                 trials = [trial3,trial4,trial5]
                 )
-
-tree_root = Root(browser = CellBrowser(cens=[cell1,cell2]))
+"""
+tree_root = Root(browser = CellBrowser(cens=cells))
 
 tree_editor = TreeEditor(
     nodes = [
@@ -81,7 +87,9 @@ tree_editor = TreeEditor(
             auto_open = True,
             children = 'trials',
             label = 'snum',
-            view = View(Group('cellid',orientation = 'vertical',show_left=True)) ),
+            view = View(Group(
+                        Item('cellid'),
+                        Item('files'), orientation = 'vertical',show_left =True)) ),
         TreeNode( node_for = [Trial],
             auto_open = False,
             children = '',
