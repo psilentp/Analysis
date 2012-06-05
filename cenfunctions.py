@@ -187,8 +187,9 @@ class TimeData(Event):
 
 class TimeSeries(Event):
     """a class for generalized evenly sampled time series data"""
-    def __init__(self,**kwargs):
+    def __init__(self,*args,**kwargs):
     #parse the **kwargs
+        import neo
         tunits = kwargs.pop('tunits', 's')
         yunits = kwargs.pop('yunits', 'V')
         hdf5_key = kwargs.pop('hdf5_key', '')
@@ -199,6 +200,15 @@ class TimeSeries(Event):
         t = cp.copy(kwargs.pop('t', quan.Quantity([],tunits,dtype = 'float32')))
         y = cp.copy(kwargs.pop('y', quan.Quantity([],yunits,dtype = 'float32'))) 
         dt = cp.copy(kwargs.pop('dt', quan.Quantity(1,tunits)))
+        if type(args[0]) is neo.core.analogsignal.AnalogSignal:
+            sig = args[0]
+            tunits = sig.times.units
+            yunits = sig.units
+            event_start = sig.t_start
+            event_name = sig.name
+            t = cp.copy(sig.times)
+            y = array(sig)
+            dt = sig.sampling_period
                  
     #ensure that the three type parameters (t,y,and dt) are of Quantity type,
     #otherwise, convert them using tunits and yunits

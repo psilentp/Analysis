@@ -122,7 +122,7 @@ class HekaIO(BaseIO):
                 seg.annotate(**d)
         create_many_to_one_relationship(seg)
         ### add protocols to signals
-        for sig in seg.analogsignals:
+        for sig_index,sig in enumerate(seg.analogsignals):
             pgf_index = sig.annotations['pgf_index']
             st_rec = self.pgf.tree['children'][pgf_index]['contents']
             chnls = [ch for ch in self.pgf.tree['children'][pgf_index]['children']]
@@ -134,9 +134,10 @@ class HekaIO(BaseIO):
                     if not(int(se_rec.seVoltageSource)):
                         se_voltage = pq.Quantity(float(se_rec.seVoltage),'V')
                     else:
-                        se_voltage = pq.Quantity(float(chnl['contents'].chHolding))
+                        se_voltage = pq.Quantity(float(chnl['contents'].chHolding),'V')
                     epoch = neo.Epoch(ep_start,se_duration,'protocol_epoch',value=se_voltage,channel_index=ch_index)
                     fully_annototate(chnl,epoch)
+                    epoch.annotations['sig_index'] = sig_index
                     ep_start = ep_start + se_duration
                     seg.epochs.append(epoch)
         return seg
@@ -178,6 +179,23 @@ def getleafs(tree_obj,f):
             [leaflist.append(leaf) for leaf in getleafs(child,f)]
         return leaflist
 
+def protocol_signal(seg,sig_index,channel_index):
+    """return a protocol signal for the apropriate trace"""
+    criteria = lambda ep: ep.annotations['sig_index'] == sig_index and ep.annotations['channel_index'] == channel_index
+    epochs = filter(criteria,seg.epochs)
+    print [ep.annotations['value'] for ep in epochs]
+    total_duration = reduce(lambda x,y: x + y.time,epochs,pq.Quantity(0,'s'))
+    sampling_period = seg.analogsignals[sig_index].sampling_period
+    units = seg.analogsignals[sig_index].units
+    prot_array = np.zeros(int(total_duration/sampling_period))
+    left_index = 0
+    for epoch in epochs:
+        right_index = int(epoch.duration/sampling_period) + left_index
+        print right_index,left_index
+        prot_array[left_index:right_index] = epoch.annotations['value']
+        left_index = right_index
+    return AnalogSignal(prot_array,sampling_period = sampling_period,units = units)
+                 
 def gettrace(trec,f):
     import numpy as np
     format_type_lenghts = [2,4,4,8]
