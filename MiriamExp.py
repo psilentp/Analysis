@@ -35,6 +35,7 @@ def ts(sig,*key,**kwargs):
 
 
 fprefix = '/Volumes/Data/CENs/CEN'
+fprefix = '/Volumes/BigGuy/CELLS/CEN'
 
 errors = [['182','THL_2012-03-19_17-40-54_000.dat','THL_2012-03-19_17-49-46_000.dat'],
     ['179','THL_2012-03-14_20-02-26_000.dat','THL_2012-03-14_20-06-51_000.dat'],
@@ -62,7 +63,7 @@ washington = [['184','THL_2012-03-21_18-40-42_000.dat','THL_2012-03-21_18-44-42_
 washington = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in washington]
 jefferson = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in jefferson]
 errors = [[fprefix+c+'/'+x,fprefix+c+'/'+y] for c,x,y in errors]
-
+"""
 for i,block_num in enumerate([1,2,5,1,2,4]):
     filename = washington[i][1]#'./test_data/CEN184/THL_2012-03-21_18-44-42_000.dat'
     ioreader = HekaIO(filename)
@@ -109,7 +110,9 @@ for i,block_num in enumerate([1,2,1,3,1]):
     #print input_output
 #plb.legend()
 
+"""
 
+filename = '/Volumes/BigGuy/CELLS/CEN184/THL_2012-03-21_18-44-42_000.dat'
 def get_block(filename =  filename,block_num = 1):
     def get_stimtrace(epochs,channel):
         times = []
@@ -140,19 +143,39 @@ def get_block(filename =  filename,block_num = 1):
                 max_channels = len(chnl_map.keys())
         protocol_list.append(chnl_map)
         for a_sig in seg.analogsignals:
-            sweep_list.append({'x':np.array(a_sig.times),'y':np.array(a_sig)})
+            sweep_list.append({'x':np.array(a_sig.times),'y':np.array(a_sig),'s':a_sig})
     return(sweep_list,protocol_list,max_channels)
 
 
 # plot example trace
 plb.figure()
-filename = '/Volumes/Data/CENs/CEN176/THL_2012-03-13_19-40-47_000.dat'
+#filename = '/Volumes/Data/CENs/CEN176/THL_2012-03-13_19-40-47_000.dat'
+filename = '/Volumes/BigGuy/CELLS/CEN184/THL_2012-03-21_18-44-42_000.dat'
 data = get_block(filename=filename,block_num=1)
-ax = plb.subplot(2,1,1)
+ax = plb.subplot(7,2,1)
 for prot in data[1][:6]:
     print prot.keys()
     plb.plot(prot['2']['x'],prot['2']['y'],color ='k')
-plb.subplot(2,1,2,sharex = ax)
-for sig in data[0]:
-    plb.plot(sig['x'],sig['y'], color = 'k')
+block_nums = [1,2,1,3,1]
+for i,filename in enumerate([fns[1] for fns in jefferson]):
+    data = get_block(filename=filename,block_num=block_nums[i])
+    plb.subplot(7,2,((i+1)*2)+1,sharex = ax)
+    for sig in data[0]:
+        sig = ts(sig['s'],0.5,2)[::10]
+        sig.sampling_period *= 10
+        plb.plot(sig.times,sig, color = 'k')
+
+plb.subplot(7,2,2,sharex = ax)
+for prot in data[1][:6]:
+    print prot.keys()
+    plb.plot(prot['2']['x'],prot['2']['y'],color ='k')
+block_nums = [1,2,5,1,2,4]
+for i,filename in enumerate([fns[1] for fns in washington]):
+    data = get_block(filename=filename,block_num=block_nums[i])
+    plb.subplot(7,2,((i+1)*2)+2,sharex = ax)
+    for sig in data[0]:
+        sig = ts(sig['s'],0.5,2)[::10]
+        sig.sampling_period *= 10
+        plb.plot(sig.times,sig, color = 'k')
+ax.set_xbound([0.5,2])
 plb.show()
