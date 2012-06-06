@@ -183,15 +183,17 @@ def protocol_signal(seg,sig_index,channel_index):
     """return a protocol signal for the apropriate trace"""
     criteria = lambda ep: ep.annotations['sig_index'] == sig_index and ep.annotations['channel_index'] == channel_index
     epochs = filter(criteria,seg.epochs)
-    print [ep.annotations['value'] for ep in epochs]
-    total_duration = reduce(lambda x,y: x + y.time,epochs,pq.Quantity(0,'s'))
+    #print [ep.annotations['value'] for ep in epochs]
+    total_duration = seg.analogsignals[sig_index].times[-1]
+    #reduce(lambda x,y: x + y.time,epochs,pq.Quantity(0,'s'))
     sampling_period = seg.analogsignals[sig_index].sampling_period
-    units = seg.analogsignals[sig_index].units
-    prot_array = np.zeros(int(total_duration/sampling_period))
+    units = seg.epochs[0].annotations['value'].units
+    prot_array = np.array(seg.analogsignals[0])#np.zeros(int(total_duration/sampling_period))
+    prot_array[:] = epochs[-1].annotations['value']
     left_index = 0
     for epoch in epochs:
         right_index = int(epoch.duration/sampling_period) + left_index
-        print right_index,left_index
+        #print right_index,left_index
         prot_array[left_index:right_index] = epoch.annotations['value']
         left_index = right_index
     return AnalogSignal(prot_array,sampling_period = sampling_period,units = units)

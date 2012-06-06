@@ -200,7 +200,8 @@ class TimeSeries(Event):
         t = cp.copy(kwargs.pop('t', quan.Quantity([],tunits,dtype = 'float32')))
         y = cp.copy(kwargs.pop('y', quan.Quantity([],yunits,dtype = 'float32'))) 
         dt = cp.copy(kwargs.pop('dt', quan.Quantity(1,tunits)))
-        if type(args[0]) is neo.core.analogsignal.AnalogSignal:
+        
+        if len(args) > 0 and (type(args[0]) is neo.core.analogsignal.AnalogSignal):
             sig = args[0]
             tunits = sig.times.units
             yunits = sig.units
@@ -223,7 +224,9 @@ class TimeSeries(Event):
             event_duration = quan.Quantity(event_duration,tunits)
         if not(type(event_start) == quan.Quantity):
             event_start = quan.Quantity(event_start,tunits)
-    
+        print 'tunits ' + str(tunits)
+        print 'yunits ' + str(yunits)
+        print 'y.units ' + str(y.units)
     #call the super-class constructor
         Event.__init__(self,
                         event_start = event_start,
@@ -480,6 +483,11 @@ class TimeSeries(Event):
     def set_yunits(self,units):
         self.yunits = units
         self.y.units = units
+
+    def set_tunits(self,units):
+        self.tuints = units
+        self.dt.units = units
+        self.t.units = units
         
     def animate(self,n,speed,box):
         import time
@@ -1287,6 +1295,10 @@ class CapRecord(dict):
          object, the incell capacitive transient object and the subtracted 
          capacitive transient and the step protocol.""" 
         dict.__init__(self)
+        oncell_cap.set_yunits('pA')
+        incell_cap.set_yunits('pA')
+        sub_cap.set_yunits('pA')
+        
         self.event_keys= ['oncell_cap',
                           'incell_cap',
                           'sub_cap']
@@ -1352,7 +1364,7 @@ class CapRecord(dict):
     def wholecell_str(self,Val):
         self.str_items['wholecell'] = Val
     
-    def __repr__(Self):
+    def __repr__(self):
         retstr = ''
         retstr += "-------------------- \nTraces Loaded: \n-------------------- \n"
         retstr += self.keys()
@@ -1382,21 +1394,23 @@ class CapRecord(dict):
         ax1 = axes(ax1_rect)
         ax1.set_color_cycle(['m','m','c','c','g','g'])
         alpha_list = [0.2,0.2,0.7] #alpha values for the display fit curves
-        plotrange = [0.00102, 0.00115] #time range to plot the fits
+        plotrange = [0.00102, 0.00125] #time range to plot the fits
         
         events = [self[k] for k in self.event_keys]
         line_labels = self.event_keys
         for e,f,a,l in zip(events[0:3],self.fit_list[0:3],alpha_list,line_labels):
             dat = e.ts(*plotrange,tunits = 's') #a slice (plotrange) of cap traces data.
-            xpnts = e.ts(*self.pfitrange,tunits = 's').get_t_array() 
-            f = f.fx(xpnts)# The fit Points
+            xpnts = e.ts(*self.pfitrange,tunits = 's').get_t_array()
+            #xpnts -= xpnts[2]
+            fx = f.fx(xpnts)# The fit Points
             dat.plot(marker = 'o',label = l) #plot the sampled data points.
-            start = float(self.pfitrange[0] - plotrange[0])
+            start = float(self.pfitrange[0] - plotrange[0])-xpnts[1]
             stop = float(self.pfitrange[1] - plotrange[0]) 
             xpnts = quan.Quantity(xpnts,e.dt.units)
             xpnts += quan.Quantity(start,'s')
-            plot(xpnts.rescale('s'),f, lw = 6, alpha = a) #plot the fit curves
-        
+            plot(xpnts.rescale('s'),fx, lw = 6, alpha = a) #plot the fit curves
+            
+
         xlbs = ax1.get_xticklabels()
         [l.set_visible(False) for l in xlbs]
         ylabel(unicode("Im (" + e.y.dimensionality.unicode + ")",'utf-8'))
@@ -1472,11 +1486,12 @@ class CapRecord(dict):
     def calc_capacitance(self):
         """does the work of calculating the capacitance for all three traces"""
         trange_pos = [0.00106, 0.0014] #time range to use to calculate capacitance 
+        #trange_pos = [0.00106, 0.0014]
         self.pfitrange = trange_pos #set the fit range
         self.fit_list = [] #initialize a empty list to hold the fits
         for k in self.event_keys: #itt through all the traces except the last one
             i = self[k] # get the trace by key
-            y = i.ts(*trange_pos,tunits = 's') # get the y data in the time slice  
+            y = i.ts(*trange_pos,tunits = 's') # get the y data in the time slice 
             x = i.ts(*trange_pos,tunits = 's').get_t_array() #get the x data in the time slice
             y = array(y.y) #convert the y data into an array for the fits
             self.fit_list.append(self.__make_fits__(x,y)) # make the fit using x and y array
@@ -1561,7 +1576,7 @@ class CapRecord(dict):
         i1 = self.fit_list[pos_fit_ind].prm_byname('i_sted')
         i2 = self.fit_list[neg_fit_ind].prm_byname('i_sted')
         delta_i = i1 - i2
-        print delta_i
+        #print delta_i
         ##use current during the 
         trace = self[trace_ind]
         i1 = np.mean(trace.ts(0.00205,0.00215,tunits = 's'))
@@ -1569,7 +1584,7 @@ class CapRecord(dict):
         
         
         delta_i = i1 - i2
-        print delta_i
+        #print delta_i
         #whole cell tau
         tau = self.fit_list[pos_fit_ind].prm_byname('tau')
 
@@ -1599,7 +1614,7 @@ class CapRecord(dict):
         FitModel to the CapRecord object. Future versions should search for the 
         greatest positive and negative going point and set the fit range 
         accordingly. Perhaps this should be the work of the calling function"""
-        
+
         #get the initial guess by linear regression on log transformed data
         lg,offset = psl.lntransform(y) 
         m,b = polyfit(x,lg,1)

@@ -11,10 +11,11 @@ from ZODB import FileStorage, DB
 from BTrees.IOBTree import IOBTree
 import transaction
     
-storage = FileStorage.FileStorage('/Users/psilentp/Desktop/Analysis/optical_db.fs')
+#storage = FileStorage.FileStorage('/Users/psilentp/Desktop/Analysis/optical_db.fs')
+
+storage = FileStorage.FileStorage('/Volumes/Storage/psilentp/Desktop/Ephys/Analysis/optical_db.fs')
 
 def get_db():
-
     #open up the file storage
     #create a db object using the file
     db = DB(storage)
