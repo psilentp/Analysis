@@ -115,6 +115,8 @@ class CapTrans(Experiment):
         return str(self.cap)
         
     def load(self):
+        if 'HEKA_cell' in self.cdm.keys():
+            pass
         #parse the file names
         basedir = '/Volumes/UNTITLED/CENs/CEN' + \
                    str(self.cdm['cennum']) + '/'
