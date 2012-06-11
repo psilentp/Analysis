@@ -16,6 +16,7 @@ import psilentplib as psl
 import pylab as plb
 import quantities as quan
 
+datapath = '/Volumes/Data/CENs_AXON'
 class Cell(persistent.Persistent):
     def __init__(self,**kwargs):
         cdm = kwargs.pop('cdm',None)
@@ -118,7 +119,7 @@ class CapTrans(Experiment):
         if 'HEKA_cell' in self.cdm.keys():
             pass
         #parse the file names
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         on_cell_file = basedir + self.cdm['on_cell_captrans']['files']
         in_cell_file = basedir + self.cdm['in_cell_captrans']['files']
@@ -215,7 +216,7 @@ class FamData(Experiment):
 class IFamCorrected(FamData):
        
     def load(self):
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         on_cell_file = basedir + self.cdm['on_cell_ifam']['files']
         in_cell_file = basedir + self.cdm['in_cell_ifam']['files']
@@ -242,7 +243,7 @@ class IFamCorrected(FamData):
 class LongIFam(FamData):
     
     def load(self):
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         long_file = basedir + self.cdm['long_ifam']['files']
         sig_key = self.cdm['long_ifam']['sig_key']
@@ -261,7 +262,7 @@ class LongIFam(FamData):
 class IFamRP(LongIFam):
     """class to hold Rev. pot. data"""
     def load(self):
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         data_file = basedir + self.cdm['rev_pot']['files'][0]
         sig_key = self.cdm['on_cell_ifam']['sig_key']
@@ -294,7 +295,7 @@ class OpticalDRC(Experiment):
     def load(self,cdm,cdmkey):
         self.cdm = cdm
         #parse the filenames
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         filelist = [basedir + x for x in self.cdm[cdmkey]['files']]
         #make a persistent list for the trials
@@ -565,7 +566,7 @@ class SynVclampDRC_low(VclampDRC):
 class BluePulseIC(Experiment):
     
     def load(self):
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         files = [basedir + x for x in self.cdm['ic_bluepulse_long']['files']]
         self.currentlist = persistent.list.PersistentList()
@@ -649,7 +650,7 @@ class BluePulseIC(Experiment):
 class BluePulseVC(Experiment):
     
     def load(self):
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         files = [basedir + x for x in self.cdm['vc_bluepulse_long']['files']]
         self.currentlist = persistent.list.PersistentList()
@@ -733,7 +734,7 @@ class BluePulseVC(Experiment):
 
 class BluePulse(Experiment):    
     def load(self):
-        basedir = '/Volumes/UNTITLED/CENs/CEN' + \
+        basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         try:
             lowfiles = [basedir + x for x in self.cdm['blue_pulse']['bp_low']['files']]

@@ -3,7 +3,8 @@ from heka_io import HekaIO
 import cenfunctions as cnf
 def get_captrace(group = 0):
     #h_reader = HekaIO('/Volumes/Storage/psilentp/Desktop/Ephys/Analysis/test_data/CEN111/THL_2011-07-09_15-02-54_000.dat')
-    h_reader = HekaIO('/Volumes/Storage/psilentp/Desktop/Ephys/Analysis/test_data/CEN189/THL_2012-05-05_03-47-10_000.dat')
+    #h_reader = HekaIO('/Volumes/Storage/psilentp/Desktop/Ephys/Analysis/test_data/CEN189/THL_2012-05-05_03-47-10_000.dat')
+    h_reader = HekaIO('/Users/psilentp/Documents/Projects/Analysis/test_data/CEN189/THL_2012-05-05_03-47-10_000.dat')
     blo = h_reader.read_block(group = group)
     seg = blo.segments[0]
     tmsirs = [cnf.TimeSeries(sig) for sig in seg.analogsignals]
