@@ -23,6 +23,23 @@ import os
 #from datafiles import CEN_data_map
 #from datafiles import c_list
 
+def write_sorted_plist(d,f):
+    from collections import OrderedDict
+    keylist = d.keys()
+    def custom_comp(k):
+        try:
+            return int(k)
+        except ValueError:
+            return -1
+    keylist.sort(key = custom_comp)
+    d2 = OrderedDict()
+    for key in keylist:
+        d2.update({key:d[key]})
+    print d2.keys()
+    writer = SortedPlistWriter(f)
+    writer.writeDict(d2)
+    
+import plistlib
 class SortedPlistWriter(plistlib.PlistWriter):
     def writeDict(self,d):
         self.beginElement("dict")
@@ -140,7 +157,11 @@ def add_new_cells(explist):
         #get the root of the connection
         dbroot = connection.root()
         #get a reference to celldb
-        celldb = dbroot['celldb']
+        try:
+            celldb = dbroot['celldb']
+        except KeyError:
+            dbroot['celldb'] = {}
+            celldb = dbroot['celldb']
         #celldb = dba.get_db()
         #load and store the data for a cell
         if not(CEN in celldb):
@@ -187,9 +208,9 @@ def main():
     """
     #explist = [759]
     #explist = [1188]
-    explist = c_list
-    c_list.remove(1172)
-    #explist = [1171]
+    #explist = c_list
+    #c_list.remove(1172)
+    explist = [1224]
     r = 0
     for CEN in explist:
         import persistent
