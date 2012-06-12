@@ -34,9 +34,7 @@ class FitModel:
         self.function = function
         self.x = x
         self.y = y
-        print [str(pr) for pr in self.params]
         p0 = fit(self.params,self.function,self.x,self.y)
-        print [str(pr) for pr in self.params]
         self.paramVals = [i() for i in self.params]
         self.ss = sum((y-function(self.paramVals,x))**2)
         self.df = size(y) - size(params)

@@ -401,7 +401,7 @@ class TimeSeries(Event):
     
     def get_low_filter(self,Hz):
     #return a low-pass-filterd version of the time series
-        import FiltFilt
+        import filtfilt
         filter_order = 3
         sampfreq = 1/self.dt.rescale('sec')
         filtfreq = quan.Quantity(Hz,'Hz')
@@ -409,7 +409,7 @@ class TimeSeries(Event):
         from scipy.signal import butter
         [b,a]=butter(filter_order,passband_peram)
         ob = cp.copy(self)
-        ob.y = quan.Quantity(FiltFilt.filtfilt(b,a,self.y),self.yunits)
+        ob.y = quan.Quantity(filtfilt.filtfilt(b,a,self.y),self.yunits)
         return ob
     
     def get_normalized(self):
@@ -861,8 +861,10 @@ class CurrentFamily(FamilyRecord):
                               record_type = record_type)
     
     def choose_iv_nslope(self, *args,**kwargs):
-        """pass, start, stop and number of bins, optionally pass the time units"""
+        """ finds the i_v with the greatest n-ness in the slope
+            pass, start, stop and number of bins, optionally pass the time units"""
         tunits = kwargs.pop('tunits','s')
+        #when to look
         try:
             start = args[0]
             stop = args[1]
@@ -885,6 +887,7 @@ class CurrentFamily(FamilyRecord):
                 return 0
             else:
                 return -1
+        #print i_list
         i_list.sort(ilist_comp)
         i = i_list[-1][0]
         v = [ ssig.events['stims'].ts(start,stop,tunits = tunits).y.mean() for ssig in self]
@@ -1003,6 +1006,8 @@ class StimCurrentFam(CurrentFamily):
         self.stimtrace.plot(**kwa)
         
         axes(ax1)
+        print 'here'
+        [x.events['signals'].set_yunits('pA') for x in self]
         [x.events['signals'].plot(**cp.copy(kwargs)) for x in self]
         #formatting
         xlbs = ax1.get_xticklabels()
@@ -1023,7 +1028,7 @@ class StimCurrentFam(CurrentFamily):
         ax0.axis('tight')
         ax1.axis('tight')
         ax2.axis('tight')
-        ax1.set_ylim([-30,40])
+        ax1.set_ylim([-70,100])
         ax2.set_xlim([0,3])
         kill_spines(ax0)
         kill_spines(ax1)
@@ -1046,7 +1051,7 @@ class StimCurrentFam(CurrentFamily):
         stim_epoch =  kwargs.pop('stim_epoch',[0.97,1.04])
         baseline = self.get_iv(base_epoch[0],base_epoch[1],tunits = 's')
         peak = self.get_iv(stim_epoch[0],stim_epoch[1],tunits = 's',mode = 'peak')
-        print "here"
+        #print "here"
         return peak-baseline
     
 class VoltageFamily(FamilyRecord): 

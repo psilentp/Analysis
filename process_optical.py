@@ -151,7 +151,7 @@ def add_new_cells(explist):
         import transaction
         storage = FileStorage.FileStorage('optical_db.fs')
         #create a db object using the file
-        db = DB(storage)
+        db = DB(storage,large_record_size=150000000)
         #open a connection to the db object
         connection = db.open()
         #get the root of the connection
@@ -160,7 +160,7 @@ def add_new_cells(explist):
         try:
             celldb = dbroot['celldb']
         except KeyError:
-            dbroot['celldb'] = {}
+            dbroot['celldb'] = IOBTree()
             celldb = dbroot['celldb']
         #celldb = dba.get_db()
         #load and store the data for a cell
