@@ -224,9 +224,9 @@ class TimeSeries(Event):
             event_duration = quan.Quantity(event_duration,tunits)
         if not(type(event_start) == quan.Quantity):
             event_start = quan.Quantity(event_start,tunits)
-        print 'tunits ' + str(tunits)
-        print 'yunits ' + str(yunits)
-        print 'y.units ' + str(y.units)
+        #print 'tunits ' + str(tunits)
+        #print 'yunits ' + str(yunits)
+        #print 'y.units ' + str(y.units)
     #call the super-class constructor
         Event.__init__(self,
                         event_start = event_start,
@@ -335,9 +335,9 @@ class TimeSeries(Event):
     #in object time units
         tunits = kwargs.pop('tunits',self.dt.units)
         timebase = kwargs.pop('timebase','local')
-        print 'here'
-        print timebase
-        print timebase == 'global'
+        #print 'here'
+        #print timebase
+        #print timebase == 'global'
         if timebase == 'global':
             print 'global'
             start -= self.event_start.magnitude
@@ -1404,7 +1404,7 @@ class CapRecord(dict):
             #xpnts -= xpnts[2]
             fx = f.fx(xpnts)# The fit Points
             dat.plot(marker = 'o',label = l) #plot the sampled data points.
-            start = float(self.pfitrange[0] - plotrange[0])-xpnts[1]
+            start = float(self.pfitrange[0] - plotrange[0])#-xpnts[1]
             stop = float(self.pfitrange[1] - plotrange[0]) 
             xpnts = quan.Quantity(xpnts,e.dt.units)
             xpnts += quan.Quantity(start,'s')
@@ -1477,11 +1477,11 @@ class CapRecord(dict):
             axes(axlist[i])
             text(xtext,ytext*-1,str(f),verticalalignment = 'center', horizontalalignment = 'center')
 
-        def plot_summary(self):
-            range = [0.001,0.0015]
-            self.event_list[0].ts(*range).plot()
-            self.event_list[0].ts(*range).plot()
-            self.event_list[0].ts(*range).plot()
+    def plot_summary(self):
+        range = [0.001,0.0015]
+        self.event_list[0].ts(*range).plot()
+        self.event_list[0].ts(*range).plot()
+        self.event_list[0].ts(*range).plot()
 
     def calc_capacitance(self):
         """does the work of calculating the capacitance for all three traces"""

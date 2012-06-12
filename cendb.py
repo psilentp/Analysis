@@ -15,8 +15,9 @@ import abfloader as abl
 import psilentplib as psl
 import pylab as plb
 import quantities as quan
+import heka_io as hio
 
-datapath = '/Volumes/Data/CENs_AXON'
+datapath = '/Volumes/Data/CENs/CEN'
 class Cell(persistent.Persistent):
     def __init__(self,**kwargs):
         cdm = kwargs.pop('cdm',None)
@@ -79,8 +80,7 @@ class Cell(persistent.Persistent):
             self.ic_bluepulse_long = BluePulseIC(self.cdm)
             self.ic_bluepulse_long.load()
             transaction.commit()
-        
-            
+                    
         if 'blue_pulse' in self.cdm:
             if not (self.cennum == 777):
                 self.blue_pulse = BluePulse(self.cdm)
@@ -116,20 +116,36 @@ class CapTrans(Experiment):
         return str(self.cap)
         
     def load(self):
-        if 'HEKA_cell' in self.cdm.keys():
-            pass
         #parse the file names
         basedir = datapath + \
-                   str(self.cdm['cennum']) + '/'
+            str(self.cdm['cennum']) + '/'
         on_cell_file = basedir + self.cdm['on_cell_captrans']['files']
         in_cell_file = basedir + self.cdm['in_cell_captrans']['files']
-        sig_key = self.cdm['on_cell_captrans']['sig_key']
-        
-        #load the raw data
-        self.on_cell_cap = self.load_trans(on_cell_file,sig_key)
-        self.in_cell_cap = self.load_trans(in_cell_file,sig_key)
-        self.stim = self.load_stim(in_cell_file)
-        
+        if 'hekaID' in self.cdm.keys():
+            #oncell
+            group = self.cdm['on_cell_captrans']['path'][0]
+            h_reader = hio.HekaIO(on_cell_file)
+            blo = h_reader.read_block(group = group)
+            seg = blo.segments[0]
+            tmsirs = [cnf.TimeSeries(sig) for sig in seg.analogsignals]
+            sum = reduce(lambda x,y:x+y,tmsirs)
+            self.on_cell_cap = sum/len(tmsirs)
+            #incell
+            group = self.cdm['in_cell_captrans']['path'][0]
+            h_reader = hio.HekaIO(on_cell_file)
+            blo = h_reader.read_block(group = group)
+            seg = blo.segments[0]
+            tmsirs = [cnf.TimeSeries(sig) for sig in seg.analogsignals]
+            sum = reduce(lambda x,y:x+y,tmsirs)
+            self.in_cell_cap = sum/len(tmsirs)
+            #stim
+            self.stim = cnf.TimeSeries(hio.protocol_signal(seg,0,0))
+        else:
+            sig_key = self.cdm['on_cell_captrans']['sig_key']
+            #load the raw data
+            self.on_cell_cap = self.load_trans(on_cell_file,sig_key)
+            self.in_cell_cap = self.load_trans(in_cell_file,sig_key)
+            self.stim = self.load_stim(in_cell_file)
         #make the subtracted cap file
         self.sub_cap = self.in_cell_cap - self.on_cell_cap  
         #construct the CapRecord object
@@ -170,47 +186,56 @@ class CapTrans(Experiment):
 
 class FamData(Experiment):
     
-    def loadfam(self,filename,sig_key):
-        #load the raw data
-        print("loading file:" + filename)
-        dat = abl.load_data(filename)
-        #load the protocol
-        prot = abl.load_protocol(filename)
-        #load the datetime info
-        info = abl.load_info(filename)
-        #get the time array
-        tms = dat['time']
-        #create a list of sweeps
-        sweeps = [cnf.TimeSeries(dt = tms[1],
+    def loadfam(self,filename,sig_key = None,group = 0):
+        if 'hekaID' in self.cdm.keys():
+            
+            print filename
+            reader = hio.HekaIO(filename)
+            block = reader.read_block(group = group)
+            sweeps = [cnf.TimeSeries(seg.analogsignals[0]) for seg in block.segments]
+            prots = [cnf.TimeSeries(hio.protocol_signal(seg,0,0)) for seg in block.segments]
+            fam = cnf.CurrentFamily(response_list = sweeps,cmnd_list = prots)
+        else:
+            #load the raw data
+            print("loading file:" + filename)
+            dat = abl.load_data(filename)
+            #load the protocol
+            prot = abl.load_protocol(filename)
+            #load the datetime info
+            info = abl.load_info(filename)
+            #get the time array
+            tms = dat['time']
+            #create a list of sweeps
+            sweeps = [cnf.TimeSeries(dt = tms[1],
                  y = d,
                  yunits = dat['units'][sig_key],
                  tunits = 'us')
                  for d in dat['signals'][sig_key]]
-        #the list loads backwards so reverse it
-        sweeps.reverse()
-        try:
-            prots = [cnf.TimeSeries(dt = tms[1],
+            #the list loads backwards so reverse it
+            sweeps.reverse()
+            try:
+                prots = [cnf.TimeSeries(dt = tms[1],
                                 y = p, 
                                 yunits = prot['units'][0],
                                 tunits = 'us') 
                                 for p in prot['channel']['Vcmd']['analog']]
-        except KeyError:
-            prots = [cnf.TimeSeries(dt = tms[1],
+            except KeyError:
+                prots = [cnf.TimeSeries(dt = tms[1],
                                 y = p, 
                                 yunits = prot['units'][0],
                                 tunits = 'us') 
                                 for p in prot['channel']['Cmd 0']['analog']]
-        #make an o_fam
-        if type(self) is IFamRP:
-            stim = cnf.TimeSeries(dt = tms[1],
+            #make an o_fam
+            if type(self) is IFamRP:
+                stim = cnf.TimeSeries(dt = tms[1],
                                  y = prot['channel']['Vcmd']['digital'][0],
                                  yunits = prot['units'][0],
                                  tunits = 'us') 
-            fam = cnf.StimCurrentFam(response_list = sweeps,cmnd_list = prots,stim = stim)
-        else:
-            fam = cnf.CurrentFamily(response_list = sweeps,cmnd_list = prots)
+                fam = cnf.StimCurrentFam(response_list = sweeps,cmnd_list = prots,stim = stim)
+            else:
+                fam = cnf.CurrentFamily(response_list = sweeps,cmnd_list = prots)
         #attach info attribute
-        fam.info = info
+            fam.info = info
         return fam
                                                 
 class IFamCorrected(FamData):
@@ -221,9 +246,13 @@ class IFamCorrected(FamData):
         on_cell_file = basedir + self.cdm['on_cell_ifam']['files']
         in_cell_file = basedir + self.cdm['in_cell_ifam']['files']
         
-        sig_key = self.cdm['on_cell_ifam']['sig_key']
-        self.on_cell_fam = self.loadfam(on_cell_file,sig_key)
-        self.in_cell_fam = self.loadfam(in_cell_file,sig_key)
+        if 'hekaID' in self.cdm.keys():
+            self.on_cell_fam = self.loadfam(on_cell_file,group = self.cdm['on_cell_ifam']['path'][0])
+            self.in_cell_fam = self.loadfam(in_cell_file,group = self.cdm['in_cell_ifam']['path'][0])
+        else:
+            sig_key = self.cdm['on_cell_ifam']['sig_key']
+            self.on_cell_fam = self.loadfam(on_cell_file,sig_key)
+            self.in_cell_fam = self.loadfam(in_cell_file,sig_key)
         print "subtracting"
         self.sub_fam = self.in_cell_fam - self.on_cell_fam
         print "filtering"
