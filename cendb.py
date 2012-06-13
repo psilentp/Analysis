@@ -8,6 +8,7 @@
 """ Implements class to hold data in a cen zodb."""
 
 import persistent
+from persistent.list import PersistentList
 import transaction
 import cenfunctions as cnf
 import numpy as np
@@ -64,16 +65,17 @@ class Cell(persistent.Persistent):
             #self.best_n = self.long_ifam.corrected.choose_iv_nslope(0.02,0.4,10)
             transaction.commit()
         if 'rev_pot' in self.cdm:
-            self.rev_fam = IFamRP(self.cdm)
-            self.rev_fam.load()
-            self.rev_fam.correct(ra,ljp)
-            #cell.rev_fam.stim_ifam.stimtrace.get_thresh_crossings(0.1,tunits = 's')
-            #cell.rev_fam.stim_ifam.stims[0].get_thresh_crossings(-55,tunits = 's')
-            stim_epoch = self.rev_fam.corrected.stimtrace.get_thresh_crossings(0.1,tunits = 's')
-            stim_epoch[1] = stim_epoch[0]+0.05 #what is this for?
-            #base_epoch = self.rev_fam.stim_ifam.stims[0].get_thresh_crossings(-55,tunits = 's')
-            base_epoch = [stim_epoch[0]-0.02,stim_epoch[0]]
-            self.amp_curve = IsV(self.rev_fam.corrected.get_amp_curve(base_epoch=base_epoch,stim_epoch=stim_epoch,tunits ='s'))
+            self.rev_fam = MultiTrials()
+            self.amp_curve = MultiTrials() 
+            for trial in self.cdm['rev_pot']['trials']:
+                rfam = IFamRP(self.cdm)
+                rfam.load(trial)
+                rfam.correct(ra,ljp)
+                stim_epoch = rfam.corrected.stimtrace.get_thresh_crossings(0.1,tunits = 's')
+                stim_epoch[1] = stim_epoch[0]+0.05
+                base_epoch = [stim_epoch[0]-0.02,stim_epoch[0]]
+                self.amp_curve.append(IsV(rfam.corrected.get_amp_curve(base_epoch=base_epoch,stim_epoch=stim_epoch,tunits ='s')))
+                self.rev_fam.append(rfam)
             transaction.commit()
        
         if 'ic_bluepulse_long' in self.cdm:
@@ -300,34 +302,41 @@ class LongIFam(FamData):
     def correct(self,ra,ljp):
         self.corrected = self.primary_fam.sr_ljp_correct(ra,ljp)
         transaction.commit()
-        
+
+class MultiTrials(PersistentList):
+    def plot(self):
+        self[0].plot()
+
 class IFamRP(LongIFam):
     """class to hold Rev. pot. data"""
-    def load(self):
+    def load(self,trial):
         basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
-        data_file = basedir + self.cdm['rev_pot']['files'][0]
+        data_file = basedir + trial['files']
         
         try:
             sig_key = self.cdm['long_ifam']['sig_key']
         except KeyError:
             sig_key = None
         if 'hekaID' in self.cdm.keys():
-            group = self.cdm['rev_pot']['path'][0]
-        self.stim_ifam = self.loadfam(data_file,sig_key,group = group)
-        self.primary_fam = self.stim_ifam
-        try:
-            data_file2 = basedir + self.cdm['rev_pot']['files'][1]
-            sig_key = self.cdm['on_cell_ifam']['sig_key']
-            self.stim_ifam2 = self.loadfam(data_file2,sig_key)
-            self.primary_fam = self.stim_ifam2 + self.stim_ifam
-            self.primary_fam /= 2.0
-        except IndexError:
-            print "only one rp protocol run"
+            group = trial['path'][0]
+            self.stim_ifam = self.loadfam(data_file,sig_key,group = group)
+            #self.primary_fam = self.stim_ifam
+        else:
+            self.stim_ifam = self.loadfam(data_file,sig_key)
+            self.primary_fam = self.stim_ifam
+            try:
+                data_file2 = basedir + self.cdm['rev_pot']['files'][1]
+                sig_key = self.cdm['on_cell_ifam']['sig_key']
+                self.stim_ifam2 = self.loadfam(data_file2,sig_key)
+                self.primary_fam = self.stim_ifam2 + self.stim_ifam
+                self.primary_fam /= 2.0
+            except IndexError:
+                print "only one rp protocol run"
             
         self.primary_fam = self.stim_ifam
         transaction.commit()
-        
+
 class IsV(Experiment):
     def __init__(self,IV):
         self.IV = IV

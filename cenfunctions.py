@@ -927,6 +927,7 @@ class CurrentFamily(FamilyRecord):
         [ax1, ax2] = FamilyRecord.get_panel(self,bounds,new_panel = new_panel)
         
         axes(ax1)
+        [x.events['signals'].set_yunits('pA') for x in self]
         [x.events['signals'].plot(**cp.copy(kwargs)) for x in self]
         #formatting
         xlbs = ax1.get_xticklabels()

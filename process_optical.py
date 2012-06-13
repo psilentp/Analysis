@@ -141,6 +141,7 @@ def add_new_cells(explist):
             c_list.append(int(d[i]['cennum']))
     #create the cell data map dictionary (keyed by integers)
     CEN_data_map = dict()
+    print 1322 in c_list
     [CEN_data_map.update({i:d[str(i)]}) for i in c_list]
     plistfile.close()
     
