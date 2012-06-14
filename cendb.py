@@ -8,6 +8,7 @@
 """ Implements class to hold data in a cen zodb."""
 
 import persistent
+from persistent.list import PersistentList
 import transaction
 import cenfunctions as cnf
 import numpy as np
@@ -61,19 +62,20 @@ class Cell(persistent.Persistent):
             ljp = quan.Quantity(15,'mV')
             self.long_ifam.correct(ra,ljp)
             self.long_iv = self.long_ifam.corrected.get_iv(0.3,0.4,tunits = 's')
-            self.best_n = self.long_ifam.corrected.choose_iv_nslope(0.02,0.4,10)
+            #self.best_n = self.long_ifam.corrected.choose_iv_nslope(0.02,0.4,10)
             transaction.commit()
         if 'rev_pot' in self.cdm:
-            self.rev_fam = IFamRP(self.cdm)
-            self.rev_fam.load()
-            self.rev_fam.correct(ra,ljp)
-            #cell.rev_fam.stim_ifam.stimtrace.get_thresh_crossings(0.1,tunits = 's')
-            #cell.rev_fam.stim_ifam.stims[0].get_thresh_crossings(-55,tunits = 's')
-            stim_epoch = self.rev_fam.corrected.stimtrace.get_thresh_crossings(0.1,tunits = 's')
-            stim_epoch[1] = stim_epoch[0]+0.05
-            #base_epoch = self.rev_fam.stim_ifam.stims[0].get_thresh_crossings(-55,tunits = 's')
-            base_epoch = [stim_epoch[0]-0.02,stim_epoch[0]]
-            self.amp_curve = IsV(self.rev_fam.corrected.get_amp_curve(base_epoch=base_epoch,stim_epoch=stim_epoch,tunits ='s'))
+            self.rev_fam = MultiTrials()
+            self.amp_curve = MultiTrials() 
+            for trial in self.cdm['rev_pot']['trials']:
+                rfam = IFamRP(self.cdm)
+                rfam.load(trial)
+                rfam.correct(ra,ljp)
+                stim_epoch = rfam.corrected.stimtrace.get_thresh_crossings(0.1,tunits = 's')
+                stim_epoch[1] = stim_epoch[0]+0.05
+                base_epoch = [stim_epoch[0]-0.02,stim_epoch[0]]
+                self.amp_curve.append(IsV(rfam.corrected.get_amp_curve(base_epoch=base_epoch,stim_epoch=stim_epoch,tunits ='s')))
+                self.rev_fam.append(rfam)
             transaction.commit()
        
         if 'ic_bluepulse_long' in self.cdm:
@@ -226,16 +228,24 @@ class FamData(Experiment):
                                 tunits = 'us') 
                                 for p in prot['channel']['Cmd 0']['analog']]
             #make an o_fam
-            if type(self) is IFamRP:
+        if type(self) is IFamRP:
+            if 'hekaID' in self.cdm.keys():
+                seg = block.segments[0]
+                stim = cnf.TimeSeries(hio.protocol_signal(seg,0,2))
+                #make them shorter
+                sweeps = [sig.ts(0,5,tuints = 's')[::10] for sig in sweeps]
+                prots = [sig.ts(0,5,tuints = 's')[::10] for sig in prots]
+                stim = stim.ts(0,5,tuints = 's')[::10]
+            else:
                 stim = cnf.TimeSeries(dt = tms[1],
                                  y = prot['channel']['Vcmd']['digital'][0],
                                  yunits = prot['units'][0],
-                                 tunits = 'us') 
-                fam = cnf.StimCurrentFam(response_list = sweeps,cmnd_list = prots,stim = stim)
-            else:
-                fam = cnf.CurrentFamily(response_list = sweeps,cmnd_list = prots)
-        #attach info attribute
-            fam.info = info
+                                 tunits = 'us')
+            fam = cnf.StimCurrentFam(response_list = sweeps,cmnd_list = prots,stim = stim)
+        else:
+            fam = cnf.CurrentFamily(response_list = sweeps,cmnd_list = prots)
+            #attach info attribute
+            #fam.info = info
         return fam
                                                 
 class IFamCorrected(FamData):
@@ -275,8 +285,13 @@ class LongIFam(FamData):
         basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
         long_file = basedir + self.cdm['long_ifam']['files']
-        sig_key = self.cdm['long_ifam']['sig_key']
-        self.long_fam = self.loadfam(long_file,sig_key)
+        try:
+            sig_key = self.cdm['long_ifam']['sig_key']
+        except KeyError:
+            sig_key = None
+        if 'hekaID' in self.cdm.keys():
+            group = self.cdm['long_ifam']['path'][0]
+        self.long_fam = self.loadfam(long_file,sig_key,group = group)
         self.primary_fam = self.long_fam
         transaction.commit()
     
@@ -287,28 +302,41 @@ class LongIFam(FamData):
     def correct(self,ra,ljp):
         self.corrected = self.primary_fam.sr_ljp_correct(ra,ljp)
         transaction.commit()
-        
+
+class MultiTrials(PersistentList):
+    def plot(self):
+        self[0].plot()
+
 class IFamRP(LongIFam):
     """class to hold Rev. pot. data"""
-    def load(self):
+    def load(self,trial):
         basedir = datapath + \
                    str(self.cdm['cennum']) + '/'
-        data_file = basedir + self.cdm['rev_pot']['files'][0]
-        sig_key = self.cdm['on_cell_ifam']['sig_key']
-        self.stim_ifam = self.loadfam(data_file,sig_key)
-        self.primary_fam = self.stim_ifam
+        data_file = basedir + trial['files']
+        
         try:
-            data_file2 = basedir + self.cdm['rev_pot']['files'][1]
-            sig_key = self.cdm['on_cell_ifam']['sig_key']
-            self.stim_ifam2 = self.loadfam(data_file2,sig_key)
-            self.primary_fam = self.stim_ifam2 + self.stim_ifam
-            self.primary_fam /= 2.0
-        except IndexError:
-            print "only one rp protocol run"
+            sig_key = self.cdm['long_ifam']['sig_key']
+        except KeyError:
+            sig_key = None
+        if 'hekaID' in self.cdm.keys():
+            group = trial['path'][0]
+            self.stim_ifam = self.loadfam(data_file,sig_key,group = group)
+            #self.primary_fam = self.stim_ifam
+        else:
+            self.stim_ifam = self.loadfam(data_file,sig_key)
+            self.primary_fam = self.stim_ifam
+            try:
+                data_file2 = basedir + self.cdm['rev_pot']['files'][1]
+                sig_key = self.cdm['on_cell_ifam']['sig_key']
+                self.stim_ifam2 = self.loadfam(data_file2,sig_key)
+                self.primary_fam = self.stim_ifam2 + self.stim_ifam
+                self.primary_fam /= 2.0
+            except IndexError:
+                print "only one rp protocol run"
             
         self.primary_fam = self.stim_ifam
         transaction.commit()
-        
+
 class IsV(Experiment):
     def __init__(self,IV):
         self.IV = IV
@@ -808,7 +836,7 @@ class BluePulse(Experiment):
         prots = abl.load_protocol(filename)
         tms = prots['time']
         #return the protocl sweep
-        print "HERE"
+        #print "HERE"
         return cnf.TimeSeries(dt = tms[1],
                               y = prots['channel']['Vcmd']['digital'][0], 
                               yunits = 'mW/(mm*mm)',
@@ -822,7 +850,7 @@ class BluePulse(Experiment):
         info = abl.load_info(filename)
         #get the time array
         tms = dat['time']
-        print dat['signals'].keys()
+        #print dat['signals'].keys()
         return cnf.TimeSeries(dt = tms[1],
                               y = dat['signals'][sig_key][0],
                               yunits = 'pA',
