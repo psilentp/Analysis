@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
 <dict>
 	<key>cells</key>
 	<array>
@@ -18332,4 +18333,113 @@
 			</array>
 		</dict>
 	</dict>
+	<key>1374</key>
+	<dict>
+		<key>hekaID</key>
+		<integer>150</integer>
+		<key>cennum</key>
+		<integer>1374</integer>
+		<key>in_cell_ifam</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>3</integer>
+			</array>
+		</dict>
+		<key>in_cell_captrans</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>2</integer>
+				<integer>0</integer>
+			</array>
+		</dict>
+		<key>on_cell_captrans</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+		</dict>
+		<key>on_cell_ifam</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>1</integer>
+			</array>
+		</dict>
+		<key>long_ifam</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>7</integer>
+			</array>
+		</dict>
+	</dict>
+	<key>1374 - 2</key>
+	<dict>
+		<key>hekaID</key>
+		<integer>150</integer>
+		<key>cennum</key>
+		<integer>1374</integer>
+		<key>in_cell_ifam</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>3</integer>
+			</array>
+		</dict>
+		<key>in_cell_captrans</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>2</integer>
+				<integer>0</integer>
+			</array>
+		</dict>
+		<key>on_cell_captrans</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+		</dict>
+		<key>on_cell_ifam</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>1</integer>
+			</array>
+		</dict>
+		<key>long_ifam</key>
+		<dict>
+			<key>files</key>
+			<string>THL_2011-08-17_16-03-43_000.dat</string>
+			<key>path</key>
+			<array>
+				<integer>7</integer>
+			</array>
+		</dict>
+	</dict>
 </dict>
+</plist>

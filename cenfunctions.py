@@ -1007,7 +1007,7 @@ class StimCurrentFam(CurrentFamily):
         self.stimtrace.plot(**kwa)
         
         axes(ax1)
-        print 'here'
+        #print 'here'
         [x.events['signals'].set_yunits('pA') for x in self]
         [x.events['signals'].plot(**cp.copy(kwargs)) for x in self]
         #formatting
@@ -1491,8 +1491,8 @@ class CapRecord(dict):
 
     def calc_capacitance(self):
         """does the work of calculating the capacitance for all three traces"""
-        trange_pos = [0.00106, 0.0014] #time range to use to calculate capacitance 
-        #trange_pos = [0.00106, 0.0014]
+        #trange_pos = [0.00106, 0.0014] #time range to use to calculate capacitance 
+        trange_pos = [0.00106, 0.00116]
         self.pfitrange = trange_pos #set the fit range
         self.fit_list = [] #initialize a empty list to hold the fits
         for k in self.event_keys: #itt through all the traces except the last one
@@ -1501,7 +1501,7 @@ class CapRecord(dict):
             x = i.ts(*trange_pos,tunits = 's').get_t_array() #get the x data in the time slice
             y = array(y.y) #convert the y data into an array for the fits
             self.fit_list.append(self.__make_fits__(x,y)) # make the fit using x and y array
-        trange_neg = [0.00006, 0.0004]#same as above but for the negative going captran
+        trange_neg = [0.00006, 0.00016]#same as above but for the negative going captran
         for k in self.event_keys:
             i = self[k]
             y = i.ts(*trange_neg,tunits = 's')
