@@ -35,7 +35,7 @@ def md_fig(cennum):
         #current_list.append(epoch)
     
     num_trials = len(current_list)/11
-    f = plb.figure(figsize=[12,8])
+    f = plb.figure(figsize=(12,8))
     ###scatter plot
     a1 = make_axes(0.55,0.9,0.1,0.5)
     colors = ['Green','Maroon','Olive','Teal','Purple','SaddleBrown','DarkSeaGreen','AquaMarine','DarkOrchid','RosyBrown','RoyalBlue','Chocolate','LightSlateGray','YellowGreen','SteelBlue']
@@ -95,7 +95,90 @@ def md_fig(cennum):
     #fi.write("%s\t%s\t%s\t%s\t%s\n"%(cennum,-1*intercept/slope,slope*1000,std_err*1000,p_value))
     #fi.close()
     
+def ssm_fig(cennum):
+    #plb.box(on='off')
+    import quantities as quan
+    traces = load_cell(cennum)
+    if cennum > 32:
+        vh = [-90,60,-75,45,-60, 30,-45,15,-30, 0,-15]
+    else:
+        vh = [-90, -75, -60, -45, -30, -15, 0, 15, 30, 45, 60]
+        #vh = [-75, -60, -45, -30, -15,   0,  15,  30,  45,  60]
+    current_list = list()
+    
+    vh = [v-15.0 for v in vh]
+    for i,trace in enumerate(traces):
+        epoch = trace.ts(725.0,975.0,tunits = 'ms')
+        swp = trace.ts(725.0,975.0,tunits = 'ms')
+        epoch = epoch.sub_baseline(0,100,tunits = 'ms')
+        chtr = epoch.integrate(100,250,tunits = 'ms')
+        chtr = chtr/quan.Quantity(100,'ms')
+        chtr.units = 'pA'
+        epoch.set_yunits('pA')
+        swp.set_yunits('pA')
+        if i > 10:
+            i=np.mod(i,11)
+        current_list.append((vh[i],chtr,epoch,swp))
+        #current_list.append(epoch)
+    
+    num_trials = len(current_list)/11
+    f = plb.figure(figsize=(12,8))
+    
+    ###scatter plot
+    a1 = make_axes(0.55,0.9,0.1,0.85)
+    colors = ['Green','Maroon','Olive','Teal','Purple','SaddleBrown','DarkSeaGreen','AquaMarine','DarkOrchid','RosyBrown','RoyalBlue','Chocolate','LightSlateGray','YellowGreen','SteelBlue']
+    for n in range(2):
+        #print n
+        #c = colors[n]
+        c = 'k'
+        #print c
+        [plb.plot(i[0],i[1],'o',color = c) for i in current_list[(n)*len(current_list)/num_trials:(n+1)*len(current_list)/num_trials]]
+    
+    ###regression
+    xs = [i[0] for i in current_list]
+    ys = [i[1] for i in current_list]
+    from scipy import stats
+    slope,intercept,r_value,p_value,std_err = stats.linregress(xs,ys)
+    r_pot = u"Vrev: %.2f mV"%(-1*intercept/slope)
+    cond = u"Conductance:%.2f±%.2f pS"%(slope*1000,std_err*1000)
+    pval = u"p-value:%.4f"%(p_value)
+    st = r_pot + '\n' + cond + '\n' + pval
+    fv = lambda v:slope*v + intercept
+    plb.plot(np.sort(vh[:11]),[fv(v) for v in np.sort(vh[:11])],color = 'k',lw=2,alpha = 0.6)
+    a1.set_xbound([-120,70])
+    a1.set_ybound([-5,20])
+    xlims = a1.get_xlim()
+    ylims = a1.get_ylim()
+    t = plb.text(xlims[0],ylims[1]*0.8,st)
+        
+    ####baseline subtracted current plot
+    #a2 = make_axes(0.1,0.45,0.1,0.45,frameon = False)
+    #for n in range(1):
+    #    c = colors[n]
+    #    [i[2].get_low_filter(2000).plot(color = c, alpha = 0.9,lw=0.5) for i in current_list[(n)*len(current_list)/num_trials:(n+1)*len(current_list)/num_trials]]
+    
+    ###stimax for subtracted current plot
+    #stimax = make_axes(0.1,0.45,0.45,0.47,frameon = False)
+    #plb.plot([0,0.1,0.1,0.25],[0,0,1,1])
+    #format_phys(a2,0.05,2.0)
+    #format_stim(stimax)
+    format_iv(a1)
+    
+    ###unsubtracted plot
+    a3 = make_axes(0.1,0.50,0.1,0.85,frameon = False)
+    for n in range(1):
+        c = colors[n]
+        c = 'k'
+        [i[3].get_low_filter(2000).plot(color = c, alpha = 0.5,lw=0.5) for i in current_list[(n)*len(current_list)/num_trials:(n+1)*len(current_list)/num_trials]]
+    #a3.set_ybound([-60,50])
+    format_phys(a3,0.025,10.0)
+    a3.set_ybound([-50,60])
+    stimax2 = make_axes(0.1,0.5,0.85,0.87,frameon = False,sharex = a3)
+    #plb.plot([0,0.225,0.225,0.725,0.725,0.900],[0,0,1,1,0,0])
+    plb.plot([0,0.1,0.1,0.25],[0,0,1,1])
+    format_stim(stimax2)
 
+    
     
 def plot_summary():
     #25-first cell,36-wrong cell,67-probe trials
@@ -223,12 +306,13 @@ def stats_for_shawn():
     #stats summary
     print("stats summary:")
     print("AVB->AVA in lite-1 bkgrnd vs. AVA->AVB in lite-1 bkgrnd")
-    atob = [calcdict[cell]['cond'] for cell in AVA_AVB_l1 if calcdict[cell]['cond'] > 0]
-    btoa = [calcdict[cell]['cond'] for cell in AVB_AVA_l1 if calcdict[cell]['cond'] > 0]
+    atob = [calcdict[cell]['cond'] for cell in AVA_AVB_l1]# if calcdict[cell]['cond'] > 0]
+    btoa = [calcdict[cell]['cond'] for cell in AVB_AVA_l1]# if calcdict[cell]['cond'] > 0]
     print("mann whitney U comparisons")
     print(("\tU=%0.2f P=%0.5f")%stats.mannwhitneyu(atob,btoa))
     print("t test on log transformed data:")
-    print("\tt=%0.2f P=%0.5f")%stats.ttest_ind(np.log(atob),np.log(btoa))
+    print("\tt=%0.2f P=%0.5f")%stats.ttest_ind(atob,btoa)
+    #print("\tt=%0.2f P=%0.5f")%stats.ttest_ind(np.log(atob),np.log(btoa))
     print("Untransformed means:")
     print(u"AVB->AVA:%0.3f\u00B1%0.3f     AVA->AVB:%0.3f\u00B1%0.3f")%(np.mean(btoa),stats.sem(btoa),np.mean(atob),stats.sem(atob))
     print("Log transformed means:")
@@ -419,8 +503,8 @@ datamap = {
 }
     
 #basepath = "/Users/lab/Documents/Data/itx/"
-basepath = "/Volumes/BigGuy/CELLS/"
-#basepath = "/Volumes/Data/CENs_HEKA/"
+#basepath = "/Volumes/BigGuy/CELLS/"
+basepath = "/Volumes/Data/CENs_HEKA/"
 
 def get_pul(f):
     head = rh.BundleHeader(f)

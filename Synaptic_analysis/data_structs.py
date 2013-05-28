@@ -15,6 +15,10 @@ class HEKA_type(object):
         
     def parse(self,rstr):
         self.rstr = rstr
+        #print self.frmt
+        #print type(self)
+        #print len(self.rstr)
+        #print struct.calcsize(rstr)
         self.data = struct.unpack(self.frmt,self.rstr)[0]
         
     def __getitem__(self,key):
@@ -33,7 +37,7 @@ class INT(HEKA_type):
     def __init__(self,size):
         super(INT,self).__init__(size)
         if self.size == 4:
-            self.frmt = 'L'
+            self.frmt = 'I'
         elif self.size == 2:
             self.frmt = 'H'
         else:
@@ -64,7 +68,7 @@ class CARD(HEKA_type):
     def __init__(self,size):
         super(CARD,self).__init__(size)
         if self.size == 4:
-            self.frmt = 'L'
+            self.frmt = 'I'
         elif self.size == 2:
             self.frmt = 'H'
         else:
@@ -86,7 +90,7 @@ class CHAR(HEKA_type):
 class NCHILD(HEKA_type):
     def __init__(self):
         super(NCHILD,self).__init__(4)
-        self.frmt = 'L'
+        self.frmt = 'I'
 
     def __int__(self):
         return self.data

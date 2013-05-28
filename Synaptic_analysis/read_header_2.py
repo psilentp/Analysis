@@ -14,10 +14,10 @@ class TreeFile(object):
         b_file.seek(int(b_item.oStart))
         mnumber = unpack('4s',b_file.read(4))
         assert(mnumber[0] in "eerT") #  assert the magic number
-        self.num_levels = unpack('L',b_file.read(4))[0] #get the number of lev
+        self.num_levels = unpack('I',b_file.read(4))[0] #get the number of lev
         self.l_sizes = list() #list to hold the number of levels
         for l in range(self.num_levels): 
-            self.l_sizes.append(unpack('L',b_file.read(4))[0])
+            self.l_sizes.append(unpack('I',b_file.read(4))[0])
             
     def load_level(self,level,b_file):
         #pack_str = str(self.pack_strs[level]) + 'L' 
